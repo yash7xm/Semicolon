@@ -1,5 +1,5 @@
 const singInBtn = document.getElementById('singInBtn');
-const singUpBtn = document.getElementById('singUpBtn');
+const singUpBtn =  document.getElementById('singUpBtn');
 const info = document.querySelector('.info');
 const container = document.querySelector('.container');
 const heading = document.querySelector('.heading');

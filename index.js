@@ -94,6 +94,10 @@ app.post('/showPost', (req, res) => {
     res.sendStatus(200);
 })
 
+app.get('/signIn', (req,res) => {
+  res.render('auth');
+})
+
 app.get("*", async(req,res) => {
     res.sendFile(path.join(__dirname, "./index.html"))
     if(data == '')

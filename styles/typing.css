@@ -200,6 +200,7 @@ nav {
     grid-template-columns: 3fr 7fr;
     grid-template-rows: calc(2 / 8 * (100vh - 12vh)) calc(4 / 8 * (100vh - 12vh)) calc(2 / 8 * (100vh - 12vh));
     overflow-y: auto;
+    position: relative;
 }
 
 .content::-webkit-scrollbar {
@@ -386,7 +387,7 @@ nav {
 /* text */
 
 .typing-area {
-    /* position: relative; */
+    /* position: sticky; */
     grid-row: 1 / span 3;
     /* margin: 2rem; */
     /* background-color: var(--typing-area-color); */
@@ -401,13 +402,13 @@ nav {
 
 .typing-area::-webkit-scrollbar {
     background-color: transparent;
-    width: 0px;
+    width: 0;
 }
 
-.typing-area::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border-radius: 0px;
-}
+/* .typing-area::-webkit-scrollbar-thumb {
+    background-color: var(--main-text-color);
+    border-radius: 5px;
+} */
 
 #after-text {
     position: absolute;
@@ -437,7 +438,6 @@ nav {
     font-family: 'Roboto Mono', monospace;
     padding-bottom: 36px;
     filter: blur(10px);
-    /* position: relative; */
 }
 
 .given-text span {
@@ -454,6 +454,10 @@ nav {
 
 .given-text span.notTyped {
     opacity: 0.5;
+}
+
+.typing-area-wrapper {
+    position: relative;
 }
 
 .caret {

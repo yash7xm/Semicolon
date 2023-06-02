@@ -367,6 +367,7 @@ main>article[data-status="becoming-active-from-after"] {
     filter: grayscale(30%);
     overflow: clip;
     z-index: 1;
+    backdrop-filter: blur(4px);
 }
 
 .image:hover {

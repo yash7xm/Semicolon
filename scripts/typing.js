@@ -604,7 +604,7 @@ function info() {
 
 function final() {
     clearInterval(intervalId);
-    input.disabled = true;
+    input.blur();
     Words();
     S = ((correctCharsTyped/5) / (cnt / 60)).toFixed(2);
     A = (((correctWords / (cnt / 60)) * 100) / (typedWords / (cnt / 60))).toFixed(2);
@@ -616,6 +616,9 @@ function final() {
     caret.style.display = 'none';
     info();
     afterText.classList.remove('hidden');
+    console.log(input.textContent);
+    console.log(str);
+    str.innerHTML = '';
 }
 
 function moveCaret(index) {
@@ -689,6 +692,7 @@ function handlePopupInputButton() {
         popup.style.display = 'none';
         typingArea.style.opacity = '1';
         input.focus();
+        input.textContent = '';
     }
 }
 
@@ -697,7 +701,7 @@ focusPopup.addEventListener('click', () => {
     input.focus();
     str.style.filter = 'blur(0px)';
     focusPopup.style.display = 'none';
-    focusPopup.style.position = 'static';
+    // focusPopup.style.position = 'static';
     caret.style.backgroundColor = 'yellow';
 })
 
