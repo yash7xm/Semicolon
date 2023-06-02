@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semicolon</title>
+    <link rel="stylesheet" href="/styles/front-page.css">
+    <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="mouseCaret"></div>
+    
+
+    <nav data-toggled="false" data-transitionable="false">
+        <div class="logo">
+            <div class="logo-name">
+                <a href="/" class="grow-link">Semicolon</a>
+            </div>
+        </div>
+        <div class="nav-mobile-section">
+            <div class="features">
+                <div class="read-link">
+                    <a href="http://localhost:8080/read" class="grow-link">READ</a>
+                </div>
+                <div class="test-link">
+                    <a href="http://localhost:8080/test" class="grow-link">TEST</a>
+                </div>
+            </div>
+            <div class="about">
+                <div class="home-link-icon">
+                    <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="about-link-icon">
+                    <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
+                </div>
+                <div class="github-link-icon">
+                    <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-text">
+                    <a href="/" class="grow-link">REGISTER</a>
+                </div>
+            </div>
+        </div>
+        <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
+            <span>Menu</span>
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+    <main>
+        <article data-index="0" data-status="active">
+            <div class="image"></div>
+            <div class="description">
+                <div class="description-text">
+                    <p>
+                        Improve your typing speed and accuracy with our touch typing site! Our interactive lessons and
+                        progress tracking will help you save time and reduce errors. Plus, studies show that better
+                        typing skills lead to higher quality assignments completed in less time, improving your academic
+                        performance. Start typing like a pro today and experience the benefits for yourself!
+                    </p>
+                </div>
+            </div>
+            <div class="heading" onmouseover="handleMouseEnter()" onmouseleave="handleMouseExit()">
+                <div class="heading-text">
+                    <div class="heading-front-text">
+                        <h1>REDISCOVER LEARNING</h1>
+                    </div>
+                    <div class="heading-secondary-text">
+                        <h1>THROUGH TOUCHTYPING</h1>
+                    </div>
+                </div>
+                <div class="rotating-icon">
+                    <img src="https://uploads-ssl.webflow.com/60c0a5bb9df18e0c7bea5c2c/60c4acf1be141ddaf108cf16_plus-shape.svg"
+                        alt="plus-icon" class="plus-icon">
+                </div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+        <article data-index="1" data-status="inactive">
+            <div class="container">
+            </div>
+            <div class="description">
+                <div class="description-text" style="color: white">
+                    <p>
+                        Improve your typing speed and accuracy with our touch typing site! Our interactive lessons and
+                        progress tracking will help you save time and reduce errors. Plus, studies show that better
+                        typing skills lead to higher quality assignments completed in less time, improving your academic
+                        performance. Start typing like a pro today and experience the benefits for yourself!
+                    </p>
+                </div>
+            </div>
+            <div class="heading" onmouseenter="handleMouseEnter()" onmouseleave="handleMouseExit()">
+                <div class="heading-text">
+                    <div class="heading-front-text">
+                        <h1>Leaderboard</h1>
+                    </div>
+                    <div class="heading-secondary-text">
+                        <h1>LETS GO</h1>
+                    </div>
+                </div>
+                <div class="rotating-icon">
+                    <img src="https://uploads-ssl.webflow.com/60c0a5bb9df18e0c7bea5c2c/60c4acf1be141ddaf108cf16_plus-shape.svg"
+                        alt="plus-icon" class="plus-icon">
+                </div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+        <article data-index="2" data-status="inactive">
+            <div class="image"></div>
+            <div class="description">
+                <div class="description-text" style="color: white">
+                    <p>
+                        Improve your typing speed and accuracy with our touch typing site! Our interactive lessons and
+                        progress tracking will help you save time and reduce errors. Plus, studies show that better
+                        typing skills lead to higher quality assignments completed in less time, improving your academic
+                        performance. Start typing like a pro today and experience the benefits for yourself!
+                    </p>
+                </div>
+            </div>
+            <div class="heading" onmouseenter="handleMouseEnter()" onmouseleave="handleMouseExit()">
+                <div class="heading-text">
+                    <div class="heading-front-text">
+                        <h1>THIRD PAGE</h1>
+                    </div>
+                    <div class="heading-secondary-text">
+                        <h1>LETS GO</h1>
+                    </div>
+                </div>
+                <div class="rotating-icon">
+                    <img src="https://uploads-ssl.webflow.com/60c0a5bb9df18e0c7bea5c2c/60c4acf1be141ddaf108cf16_plus-shape.svg"
+                        alt="plus-icon" class="plus-icon">
+                </div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="/scripts/front-page.js"></script>
+</body>
+
+</html>

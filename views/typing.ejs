@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Page</title>
+
+    <link rel="stylesheet" href="/styles/typing.css">
+
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arvo&family=Caudex&family=Raleway&family=Roboto+Mono:wght@300&family=Space+Grotesk&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="mouseCaret"></div>
+    <div class="popups">
+        <div class="popup-wraper">
+            <div class="inputOwnTextWrapper">
+                <div class="heading">Provide your own text</div>
+                <div class="input-text" contenteditable="true"></div>
+                <div class="button" onclick="handlePopupInputButton()">Start</div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <div class="brand-name">
+            <a href="http://localhost:8080/" class="brand-link grow-link">Semicolon</a>
+        </div>
+        <div class="nav-mobile-section">
+            <div class="main-btns">
+                <div class="notes grow-link">
+                    <a href="http://localhost:8080/read">READ</a>
+                </div>
+                <div class="test grow-link">
+                    <a href="">TEST</a>
+                </div>
+                <div class="own-text grow-link">
+                    <a href="#" onclick="return false;">INPUT</a>
+                </div>
+            </div>
+            <div class="profile">
+                <a href="" class="profile-link grow-link">REGISTER</a>
+            </div>
+        </div>
+        <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
+            <span class="border-link">Menu</span>
+            <i class="fa-solid fa-bars  border-link"></i>
+        </button>
+    </nav>
+
+    <div class="content">
+        <div class="timer">
+            <div class="clock">
+                <button class="time border-link"><i class="fa-solid fa-clock"></i></button>
+            </div>
+            <ul class="timer-options">
+                <li class="grow-link" value="15">15</li>
+                <li class="grow-link" value="30">30</li>
+                <li class="grow-link" value="60">60</li>
+                <li class="grow-link" value="120">120</li>
+            </ul>
+        </div>
+        <div class="result">
+            <div class="result-content">
+                <div class="score">
+                    <p class="grow-link">Score: <br> <span>nil</span> </p>
+                </div>
+                <div class="accuracy">
+                    <p class="grow-link">Accuracy: <br> <span>nil</span> </p>
+                </div>
+                <div class="time-spent">
+                    <p class="grow-link">Time: <br> <span>nil</span> </p>
+                </div>
+            </div>
+        </div>
+        <div class="live-time">
+            <div>
+                <p class="grow-link">0</p>
+            </div>
+        </div>
+        <div class="typing-area">
+            <div class="focus-popup">
+                <div class="focus-popup-wrapper">
+                    <div class="heading"><i class="fa-solid fa-arrow-pointer"></i>  Click Here To Start!</div>
+                </div>
+            </div>
+            <div class="caret"></div>
+            <div class="caps-lock">
+                <p>Caps Lock: <span></span></p>
+            </div>
+            <p class="given-text">
+                <% if (content) { %>
+                    <%= content %> 
+                  <% } else { %>
+                    kuch bhi
+                  <% } %>                  
+            </p>
+            <div id="after-text" class="hidden"></div>
+            <input type="text" id="myInput" autocomplete="off">
+        </div>
+    </div>
+
+    <script src="/scripts/typing.js"></script>
+</body>
+
+</html>

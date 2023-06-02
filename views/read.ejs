@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/read.css">
+    <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <nav data-toggled="false" data-transitionable="false">
+        <div class="logo">
+            <div class="logo-name">
+                <a href="http://localhost:8080/" class="grow-link">Semicolon</a>
+            </div>
+        </div>
+        <div class="nav-mobile-section">
+        <div class="features">
+            <div class="read-link">
+                <a href="http://localhost:8080/read" class="grow-link">READ</a>
+            </div>
+            <div class="test-link">
+                <a href="http://localhost:8080/test" class="grow-link">TEST</a>
+            </div>
+        </div>
+        <div class="about">
+            <div class="home-link-icon">
+               <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+            </div>
+            <div class="about-link-icon">
+                <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
+            </div>
+            <div class="github-link-icon">
+                <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <div class="profile">
+            <div class="profile-text">
+                <a href="/" class="grow-link">REGISTER</a>
+            </div>
+        </div>
+    </div>
+        <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
+            <span>Menu</span>
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+
+    <div class="selection">
+        <div class="subjects">
+            <div class="sub">SUBJECT</div>
+            <div class="dropdown">
+                <button class="sub-dropdown-toggle" onclick="subToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <ul class="sub-dropdown-menu subject-select-mobile" id="subDropdownMenu">
+                    <li value="0"><%= data[0].sem[0].subjects[0].subjectName %>
+                    </li>
+                    <li value="1"><%= data[0].sem[0].subjects[1].subjectName %>
+                    </li>
+                    <li value="2"><%= data[0].sem[0].subjects[2].subjectName %>
+                    </li>
+                    <li value="3"><%= data[0].sem[0].subjects[0].subjectName %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="semester">
+            <div class="sem">SEM <span class="sem-no">1</span></div>
+            <div class="dropdown">
+               <button class="sem-dropdown-toggle" onclick="semToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <ul class="sem-dropdown-menu sem-select" id="semDropdownMenu">
+                    <li value="0">1</li>
+                    <li value="1">2</li>
+                    <li value="2">3</li>
+                    <li value="3">4</li>
+                    <li value="4">5</li>
+                    <li value="5">6</li>
+                    <li value="6">7</li>
+                    <li value="7">8</li>
+                </ul>
+            </div>
+        </div>
+        <div class="units">
+            <div class="unit">UNIT <span class="unit-no">1</span></div>
+            <div class="dropdown">
+                <button class="unit-dropdown-toggle" onclick="unitToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <ul class="unit-dropdown-menu unit-select" id="unitDropdownMenu">
+                    <li value="0">1</li>
+                    <li value="1">2</li>
+                    <li value="2">3</li>
+                    <li value="3">4</li>
+                    <li value="4">5</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="info">
+        <div class="subjects-display subject-select">
+            <div value="0"><%= data[0].sem[0].subjects[0].subjectName %></div>
+            <div value="1"><%= data[0].sem[0].subjects[1].subjectName %></div>
+            <div value="2"><%= data[0].sem[0].subjects[2].subjectName %></div>
+            <div value="3"><%= data[0].sem[0].subjects[0].subjectName %></div>
+        </div>
+        <div class="topics">
+            <% let topicIndex = 0; %>
+            <% for(let topic of data[0].sem[0].subjects[0].units[0].topics) { %>
+                <div class="card" value =<%= topicIndex %>>
+                <div class="card-image">
+                </div>
+                <div class="card-text">
+                    <h6><%= topic.name %></h6>
+                    </div>
+                </div>
+                <% topicIndex++; %>
+                <% } %>
+        </div>
+    </div>
+
+    <script src="/scripts/read.js"></script>
+</body>
+</html>

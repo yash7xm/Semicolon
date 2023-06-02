@@ -1,0 +1,336 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;     
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #050a18;
+}
+
+.gradient {
+    width: 100%;
+    height: 100%;
+    z-index: -99999;
+    position: absolute;
+    background-image: radial-gradient(circle farthest-corner at 40% 50%, #9d84ff, #9d84ff 0%, rgba(5, 10, 24, 0) 50%);
+    opacity: 0.64;
+}
+
+.container {
+    position: relative;
+    height: 80%;
+    width: 60%;
+    border: 1px solid black;
+    display: flex;
+    transition: all 1s ease;
+    z-index: 100;
+    background-color:  #050a18;
+    opacity: 0.8;
+    border: 1px solid #1e2345;
+}
+
+.logo-section {
+    background-color: transparent;
+    z-index: 99999;
+    height: 10%;
+    width: 20%;
+    margin: 1rem;
+}
+
+.logo {
+    color: #9d84ff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+.info {
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    background-color: rgba(0,0,0);
+    transition: all 1s ease;
+    z-index: 200;
+    border-right:  1px solid #1e2345;
+}
+
+.heading {
+    transition: all 1s ease;
+    margin-top: 9rem;
+    margin-bottom: 1.5rem;
+}
+
+.heading > h1 {
+     color: white;
+    font-size: 2.2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+.info-text > p {
+     color: white;
+    padding: 1rem 2.3rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+.btn {
+    width: 80%;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 5rem;
+}
+
+
+
+.btn > button {
+    border: none;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid #9d84ff;
+    border-style: solid;
+    border-radius: 10000rem;
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 400;
+    padding: 0.5rem 2.4rem;
+    line-height: 120%;
+}
+
+button {
+    cursor: pointer;
+}
+
+.reg-info {
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 300;
+    left: 0%;
+    transition: left 3s ease, opacity 300ms ease;
+    opacity: 1;
+}
+
+
+.signIn-info {
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 300;
+    left: 100%;
+    display: none;
+    opacity: 0;
+    transition: left 3s ease, opacity 300ms ease;
+}
+
+.signIn {
+    height: 100%;
+    width: 60%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    gap: 4rem;
+    transition: all 2s ease;
+    left: 40%;
+}
+
+.acc {
+    font-size: 3rem;
+    color: white;
+    font-weight: 800;
+    letter-spacing: 0.1rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+}
+
+
+.form-group {
+    position: relative;
+    margin-bottom: 2.5rem;
+    width: 60%;
+}
+
+ input {
+   border-radius: 5px;
+   border: 1px solid rgba(157, 132, 255, 0.16);
+   background-color: hsla(0, 0%, 100%, 0.04);
+   height: 2.2rem;
+   padding: 0px 0.8rem;
+   width: 100%;
+   outline: none;
+   color: white;
+}
+
+ label {
+    color: #9d84ff;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    justify-content: flex-start;
+}
+
+
+form > button {
+    padding: 0.5rem 1rem;
+    width: 25%;
+    border-radius: 1000rem;
+    border: 1px solid #ccc;
+}
+
+.reg {
+    height: 100%;
+    width: 60%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    gap: 4rem;
+    display: none;
+    transition: all 2s ease;
+    left: 40%;
+}
+
+.mobile-signIn-btn {
+    display: none;
+}
+
+@media(max-width: 1200px) {
+    .acc {
+        font-size: 2rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .heading {
+        margin-top: 8rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .heading > h1 {
+        font-size: 1.5rem;
+    }
+    
+    .info-text > p {
+        padding: 1rem 1.6rem;
+        font-family: 'Raleway', sans-serif;
+        font-size: 1rem;
+    }
+    
+    .btn {
+        width: 70%;
+        margin-top: 4.5rem;
+    }
+     
+    .btn > button {
+        font-size: 1rem;
+    }
+
+    label {
+        font-size: 0.7rem;
+    }
+
+    form > button {
+        width: 40%;
+        font-weight: 400;
+    }
+}
+
+@media(max-width: 800px) {
+
+    .container {
+        width: 80%;
+    }
+
+    .info {
+        display: none;
+    }
+
+    .reg-info {
+        display: none;
+    }
+
+    .reg {
+        display: flex;
+        width: 100%;
+        left: 0%;
+        transition: all 400ms ease;
+    }
+
+    .signIn {
+        /* display: none; */
+        width: 100%;
+        left: 100%;
+        transition: left 400ms ease;
+    }
+
+    .form-group {
+        width: 75%;
+    }
+
+    form > button {
+        width: 40%;
+        font-weight: 400;
+    }
+
+    .gradient {
+        height: 200%;
+    }
+
+    .logo {
+        letter-spacing: 0;
+    }
+
+    .mobile-signIn-btn {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        margin-top: -2rem;
+    }
+
+    .mobile-signIn-btn > button {
+        width: 100%;
+        height: 100%;
+        font-size: 0.8rem;
+        background-color: transparent;
+        border: 1px solid #9d84ff;
+        color: white;
+        border-radius: 1000rem;
+        padding: 0.5rem;
+        transition: all 300ms ease;
+    }
+
+    .mobile-signIn-btn > button:hover {
+        background-color: #9d84ff;
+    }
+
+}

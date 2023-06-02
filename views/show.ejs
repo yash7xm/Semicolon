@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/show.css">
+    <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <nav data-toggled="false" data-transitionable="false">
+        <div class="logo">
+            <div class="logo-name">
+                <a href="http://127.0.0.1:5500/index.html" class="grow-link">Semicolon</a>
+            </div>
+        </div>
+        <div class="nav-mobile-section">
+        <div class="features">
+            <div class="read-link">
+                <a href="http://localhost:8080/read" class="grow-link">READ</a>
+            </div>
+            <div class="test-link">
+                <a href="#" onclick="return false;" class="grow-link">TEST</a>
+            </div>
+        </div>
+        <div class="about">
+            <div class="home-link-icon">
+               <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+            </div>
+            <div class="about-link-icon">
+                <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
+            </div>
+            <div class="github-link-icon">
+                <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+        <div class="profile">
+            <div class="profile-text">
+                <a href="/" class="grow-link">REGISTER</a>
+            </div>
+        </div>
+    </div>
+        <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
+            <span>Menu</span>
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+    <main>
+        <article data-index="0" data-status="active">
+            <div class="heading-section">
+                <div class="heading">
+                    <p> <%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].name %></p>
+                </div>
+            </div>
+            <div class="text-section">
+                <div class="text"><%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].content %></div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+        <article data-index="1" data-status="inactive">
+            <div class="heading-section">
+                <div class="heading">
+                    <p>Phython</p>
+                </div>
+            </div>
+            <div class="text-section">
+                <div class="text"></div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+        <article data-index="2" data-status="inactive">
+            <div class="heading-section">
+                <div class="heading">
+                    <p>Microproccesor</p>
+                </div>
+            </div>
+            <div class="text-section">
+                <div class="text"></div>
+            </div>
+            <div class="move-btns">
+                <div class="left-btn" onclick="handleLeftBtn()">
+                </div>
+                <div class="right-btn" onclick="handleRightBtn()">
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="/scripts/show.js"></script>
+</body>
+</html>
