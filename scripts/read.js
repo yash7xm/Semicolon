@@ -75,7 +75,10 @@ let unitNo=0; subNo=0, semesterNo=0;
 subjectMobile.forEach(sub => {
   sub.addEventListener('click', event => {
     subNo = event.target.getAttribute('value');
-    console.log(subNo);
+    subjectMobile.forEach(subColor => {
+      subColor.style.color = "rgba(116, 112, 131)";
+    })
+    sub.style.color = 'yellow';
     showTopics();
   })
 });
@@ -83,7 +86,10 @@ subjectMobile.forEach(sub => {
 subject.forEach(sub => {
   sub.addEventListener('click', event => {
     subNo = event.target.getAttribute('value');
-    console.log(subNo);
+    subject.forEach(subColor => {
+      subColor.style.color = "rgba(116, 112, 131)";
+    })
+    sub.style.color = 'yellow';
     showTopics();
   })
 });
