@@ -210,15 +210,28 @@ article > div {
 
 .text-section {
     grid-row: span 2;
-    padding: 1rem;
+    padding: 2rem;
+    overflow-y: scroll;
 }
 
-.text {
+.text-section::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+.text-section::-webkit-scrollbar-thumb {
+    background-color: #1e2345;
+    border-radius: 5px;
+}
+
+.text p {
     height: 100%;
     width: 100%;
-    color: white;
-    font-size: 2rem;
-    font-weight: 200;
+    color: #ccc; 
+    font-size: 1.6rem; 
+    font-weight: 300; 
+    line-height: 1.4;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .heading-section {
@@ -229,12 +242,18 @@ article > div {
     padding: 1rem;
     border-bottom: 1px solid #1e2345;
     border-right: 1px solid #1e2345;
+    background-image: url(/images/goofer-eUBp69MTaNU-unsplash.jpg);
+    background-position: center;
+    background-size: cover;
 }
 
 .heading-section > div > p {
-    color: white;
+    color:   #ccc;
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .move-btns {
@@ -291,8 +310,8 @@ article > div {
     }
 
     main > article {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 0.1fr repeat(2, 0.21fr) 0.1fr;
+        grid-template-columns: none;
+        grid-template-rows: 0.5fr repeat(4,1fr) 0.5fr;
         height: max(100%, 900px);
     }
 
@@ -308,6 +327,18 @@ article > div {
 
     .heading-section > div > p {
         margin: 0;
+    }
+
+    .text-section {
+        padding: 1rem;
+    }
+
+    .text p {
+        font-size: 1rem;
+    }
+
+    .left-btn, .right-btn {
+        background-size: 3rem;
     }
 }
 
@@ -338,10 +369,12 @@ article > div {
 
     .logo {
         border: none;
+        padding: 0;
     }
 
     .logo-name {
-        margin-left: 1rem;
+        margin-left: 0.5rem;
+        padding: 0;
         font-size: 1.5rem;
     }
 

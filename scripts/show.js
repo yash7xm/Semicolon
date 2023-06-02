@@ -58,7 +58,7 @@ function handleRightBtn(){
     });
 
     let nextTopicHeading = document.querySelector(`[data-index="${nextIndex}"] p`);
-    let nextTopicContent = document.querySelector(`[data-index="${nextIndex}"] .text`);
+    let nextTopicContent = document.querySelector(`[data-index="${nextIndex}"] .text p`);
 
     if(topic < data[0].sem[0].subjects[sub].units[unit].topics.length - 1){
         topic++;
@@ -88,7 +88,7 @@ function handleLeftBtn(){
     });
 
     let nextTopicHeading = document.querySelector(`[data-index="${nextIndex}"] p`);
-    let nextTopicContent = document.querySelector(`[data-index="${nextIndex}"] .text`);
+    let nextTopicContent = document.querySelector(`[data-index="${nextIndex}"] .text p`);
 
     if(topic > 0){
         topic--;
