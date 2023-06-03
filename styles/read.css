@@ -282,7 +282,8 @@ a {
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid #1e2435;
-    color: rgba(116, 112, 131);
+    /* color: rgba(116, 112, 131); */
+    color: white;
     cursor: pointer;
 }
 
@@ -316,6 +317,10 @@ a {
     height: 65%;
     border-bottom: 1px solid #1e2345;
     z-index: -1;
+    background-image: url(/images/jazmin-quaynor-CXjp1ycr5Vw-unsplash.jpg);
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(30%);
 }
 
 .card-text {
@@ -334,20 +339,17 @@ a {
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 0.9rem;
-    color: rgba(116, 112, 131);
+    /* color: rgba(116, 112, 131); */
+    color: white;
 }
 
 .topics::-webkit-scrollbar {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 8px;
-}
-
-.topics::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    width: 6px;
 }
 
 .topics::-webkit-scrollbar-thumb {
-    background-color: rgba(116, 112, 131);
+    background-color: #1e2345;
     border-radius: 5px;
 }
 
