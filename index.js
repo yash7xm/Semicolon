@@ -24,14 +24,15 @@ mongoose
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs');
 app.use(session({
   secret: '12121212',
   resave: false,
   saveUninitialized: false
 }));
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs');
+
 
 
 const Sem1 = new mongoose.Schema({
@@ -78,7 +79,14 @@ const Sem1 = new mongoose.Schema({
     },
     score: [
       {
-        wpm: String
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Score'
+        wpm: {
+          type: String
+        },
+        accuracy: {
+          type: String
+        }
       }
     ],
     bestScore: {
@@ -100,10 +108,17 @@ const Sem1 = new mongoose.Schema({
   });
   
   const User = mongoose.model('User', userSchema);
+
+//   const ScoreSchema = new mongoose.Schema([
+//     {
+//     wpm: String,
+//     accuracy: String
+//   },
+// ]);
+
+//   const Score = mongoose.model('Score', ScoreSchema);
   
   
-
-
   async function fetchData() {
     data = await Sem1Notes.find({});
 }
@@ -153,9 +168,6 @@ app.get('/signIn', (req,res) => {
 app.post('/register', async (req, res) => {
   const { name, username, password } = req.body;
   let flag = false;
-  // const name = req.body.name;
-  // const username = req.body.username;
-  // const password = req.body.password;
   const hash = await bcrypt.hash(password, 12);
   const user = new User({
     name,
@@ -184,6 +196,7 @@ app.post('/signIn', async(req,res) => {
     const validPassword = await bcrypt.compare(password, user.password);
     if(validPassword){
       req.session.user_id = user._id;
+      console.log(user._id)
       flag2 = true;
     }
     else {
@@ -196,9 +209,42 @@ app.post('/signIn', async(req,res) => {
   }
 })
 
+app.post('/updateScore', async (req,res) => {
+  const user = await User.findOne({ _id: req.session.user_id });
+
+  const S = req.body.score;
+  const A = req.body.accuracy;
+
+  user.score.push({
+    wpm: S,
+    accuracy: A
+  });
+
+  let tests = user.testsTaken;
+  tests++;
+  user.testsTaken = tests;
+
+  let bestScore = user.bestScore;
+  if(S > bestScore)
+    user.bestScore = S;
+
+    const users = await User.find({}).sort({ bestScore: -1 });
+
+    let rank = 1;
+    for (const user of users) {
+      user.rank = rank;
+      await user.save();
+      rank++;
+    }
+
+  await user.save();
+  console.log(user);
+  res.sendStatus(200);
+})
+
 
 app.get('/userfind', async (req,res) => {
-  const user = ( await User.find({}));
+  const user = await User.find({});
   // await User.deleteMany({});
   res.send(user);
 })
