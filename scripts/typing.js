@@ -589,6 +589,18 @@ function final() {
     info();
     afterText.classList.remove('hidden');
     str.innerHTML = '';
+<<<<<<< HEAD
+=======
+    str.style.display = 'none';
+    focusPopup.removeEventListener('click', focusPopupClickHandler);
+    document.removeEventListener('click', documentClickHandler);
+<<<<<<< HEAD
+    inputArea.removeEventListener('click', clickHandler);
+    updateScoreDb();
+=======
+    inputArea.removeEventListener('click', clickHandler)
+>>>>>>> 28731277ba619fa428b2293219deba6394ada5e8
+>>>>>>> 59738a855324d8ee17028b057ed1e083528fa5ec
 }
 
 function moveCaret(index) {
@@ -718,4 +730,8 @@ async function updateScoreDb() {
       console.error(error);
       // Handle the error appropriately, such as sending an error response to the client
     }
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> 59738a855324d8ee17028b057ed1e083528fa5ec
