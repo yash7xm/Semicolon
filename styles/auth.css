@@ -212,7 +212,7 @@ form > button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: -1;
+    /* z-index: -1; */
     gap: 4rem;
     display: none;
     transition: all 2s ease;
@@ -334,4 +334,9 @@ form > button {
         background-color: #9d84ff;
     }
 
+}
+
+.msg {
+    color: orange;
+    font-size: 1.2rem;
 }

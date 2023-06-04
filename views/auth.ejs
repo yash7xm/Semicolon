@@ -47,33 +47,56 @@
         </div>
         <div class="info"></div>
         <div class="signIn">
+            <% if (typeof flag !== 'undefined') { %>
+                <div class="msg">
+                  <% if (!flag) { %>
+                    Registered Successfully!
+                  <% } else { %>
+                    Username already exists!
+                  <% } %>
+                </div>
+              <% } %>
+              <% if (typeof flag2 !== 'undefined') { %>
+                <div class="msg">
+                  <% if (!flag2) { %>
+                    Incorrect username or password!
+                  <% } %>
+                </div>
+              <% } %>
             <div class="acc">Create Account</div>
-            <form action="">
+            <form action="/register" method="post">
                 <div class="form-group">
                     <label for="regName">Name</label>
-                    <input type="text" class="name" placeholder="Name" id="regName">
+                    <input type="text" class="name" placeholder="Name" id="regName" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="regEmail">Username</label>
-                    <input type="text" class="userName" placeholder="Username" id="regUserName">
+                    <label for="regUserName">Username</label>
+                    <input type="text" class="userName" placeholder="Username" id="regUserName" name="username">
                 </div>
                 <div class="form-group">
                     <label for="regPass">Password</label>
-                    <input type="password" class="password" placeholder="Password" id="regPass">
+                    <input type="password" class="password" placeholder="Password" id="regPass" name="password">
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="reg">
+            <% if (typeof flag2 !== 'undefined') { %>
+                <div class="msg">
+                  <% if (!flag2) { %>
+                    Incorrect username or password!
+                  <% } %>
+                </div>
+              <% } %>
             <div class="acc">Howday, Sign In</div>
-           <form action="">
+           <form action="/signIn" method="post">
                 <div class="form-group">
-                    <label for="regEmail">Username</label>
-                    <input type="text" class="userName" placeholder="Username" id="regUserName">
+                    <label for="regUserName">Username</label>
+                    <input type="text" class="userName" placeholder="Username" id="regUserName" name="username">
                 </div>
                 <div class="form-group">
                     <label for="regPass">Password</label>
-                    <input type="password" class="password" placeholder="Password" id="regPass">
+                    <input type="password" class="password" placeholder="Password" id="regPass" name="password">
                 </div>
                 <button type="submit">Sign In</button>
             </form>

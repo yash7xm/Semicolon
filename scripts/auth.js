@@ -29,6 +29,7 @@ singInBtn.addEventListener('click', () => {
     setTimeout(() => {
         singIn.style.display = 'none';
         reg.style.display = 'flex';
+        reg.style.zIndex = '1000';
     }, 250);
 })
 
@@ -58,4 +59,62 @@ mobileSignIn.addEventListener('click', () => {
     reg.style.left = '-100%';
     singIn.style.left = '0%';
     // singIn.style.display = 'flex';
+})
+
+const signInForm = document.querySelector('.signIn form');
+
+signInForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.querySelector('.name');
+    const username = document.querySelector(".userName");
+    const password = document.querySelector('.password');
+
+    if(name.value.length == 0){
+        name.value = '';
+        name.setAttribute('placeholder', 'Name is required');
+    }
+    else if(name.value.length > 20 ){
+        name.value = '';
+        name.setAttribute('placeholder', 'must be < 20 chars');
+    }
+    else if(username.value.length == 0){
+        username.value = '';
+        username.setAttribute('placeholder', 'Username is required');
+    }
+    else if(username.value.length > 20){
+        username.value = '';
+        username.setAttribute('placeholder', 'must be < 20 chars');
+    }
+    else if(password.value.length < 8 || password.value.length > 20){
+        password.value = '';
+        password.setAttribute("placeholder", 'must be 8-20 chars');
+    }
+    else{
+        signInForm.submit();
+    }
+})
+
+const regForm = document.querySelector(".reg form");
+
+regForm.addEventListener("submit", async (e) => {
+    console.log('in ')
+    e.preventDefault();
+    const username = document.querySelector(".reg form .userName");
+    const password = document.querySelector('.reg form .password');
+
+    if(username.value.length == 0){
+        username.value = '';
+        username.setAttribute('placeholder', 'Username is required');
+    }
+    else if(username.value.length > 20){
+        username.value = '';
+        username.setAttribute('placeholder', 'must be < 20 chars');
+    }
+    else if(password.value.length < 8 || password.value.length > 20){
+        password.value = '';
+        password.setAttribute("placeholder", 'must be 8-20 chars');
+    }
+    else{
+        regForm.submit();
+    }
 })

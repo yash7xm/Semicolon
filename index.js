@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const moment = require('moment');
+const session = require('express-session');
 let data = '';
 let topicIndex=0, subjectIndex=0, unitIndex=0, content;
 
@@ -24,6 +27,12 @@ app.use(bodyParser.json());
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
+app.use(session({
+  secret: '12121212',
+  resave: false,
+  saveUninitialized: false
+}));
+
 
 const Sem1 = new mongoose.Schema({
     sem:
@@ -52,6 +61,49 @@ const Sem1 = new mongoose.Schema({
   })
   
   const Sem1Notes = mongoose.model('Sem1Notes', Sem1);
+
+  const userSchema = new mongoose.Schema({
+    name: {
+      type: String,
+      required: [true, 'Name cannot be blank']
+    },
+    username: { 
+      type: String, 
+      unique: true,
+      required: [true, 'Username cannot be blank']
+    },
+    password: {
+      type: String,
+      required: [true, 'Password cannot be blank']
+    },
+    score: [
+      {
+        wpm: String
+      }
+    ],
+    bestScore: {
+      type: Number,
+      default: 0
+    },
+    testsTaken: {
+      type: Number,
+      default: 0
+    },
+    joined: {
+      type: String,
+      default: moment().format('MMM Do YY')
+    },
+    rank: {
+      type: Number,
+      default: 0
+    }
+  });
+  
+  const User = mongoose.model('User', userSchema);
+  
+  
+
+
   async function fetchData() {
     data = await Sem1Notes.find({});
 }
@@ -98,8 +150,61 @@ app.get('/signIn', (req,res) => {
   res.render('auth');
 })
 
-app.get("*", async(req,res) => {
-    res.sendFile(path.join(__dirname, "./index.html"))
+app.post('/register', async (req, res) => {
+  const { name, username, password } = req.body;
+  let flag = false;
+  // const name = req.body.name;
+  // const username = req.body.username;
+  // const password = req.body.password;
+  const hash = await bcrypt.hash(password, 12);
+  const user = new User({
+    name,
+    username,
+    password: hash
+  });
+
+  try {
+    await user.save();
+    flag = false;
+  } catch (error) {
+    if (error.code === 11000) {
+      flag = true;
+    } else {
+      flag = true;
+    }
+  }
+  res.render('auth', { flag});
+});
+
+app.post('/signIn', async(req,res) => {
+  const { username, password } = req.body;
+  let flag2 = true;
+  try{
+    const user = await User.findOne({ username });
+    const validPassword = await bcrypt.compare(password, user.password);
+    if(validPassword){
+      req.session.user_id = user._id;
+      flag2 = true;
+    }
+    else {
+      flag2 = false;
+    }
+    res.render('index');
+  } catch (error) {
+    flag2 = false;
+    res.render('auth', { flag2 });
+  }
+})
+
+
+app.get('/userfind', async (req,res) => {
+  const user = ( await User.find({}));
+  // await User.deleteMany({});
+  res.send(user);
+})
+
+app.get("/", async(req,res) => {
+    res.render('index');
     if(data == '')
     await fetchData();
 })
