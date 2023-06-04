@@ -589,11 +589,6 @@ function final() {
     info();
     afterText.classList.remove('hidden');
     str.innerHTML = '';
-    str.style.display = 'none';
-    focusPopup.removeEventListener('click', focusPopupClickHandler);
-    document.removeEventListener('click', documentClickHandler);
-    inputArea.removeEventListener('click', clickHandler);
-    updateScoreDb();
 }
 
 function moveCaret(index) {

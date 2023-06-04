@@ -4,11 +4,12 @@
     --secondary-text-color: white;
     --hover-color: white;
     --border-color: #1e2345;
-    --typing-area-color: black;
     --font-1: 'Space Grotesk', sans-serif;
     --menu-color: ;
     --mouse-color: white;
-    --scroll-bar-color: ;
+    --scroll-bar-color: rgb(116, 112, 131);
+    --move-btns-hover-color: rgba(30, 36, 53, 0.16);
+    --menu-hover-color: rgb(126, 87, 194);
 }
 
 :root.theme2 {
@@ -17,11 +18,12 @@
     --secondary-text-color: white;
     --border-color: #777777;
     --hover-color: #ffffff;
-    --typing-area-color: rgb(26, 22, 22);
     --font-1: 'Raleway', sans-serif;
     --menu-color: ;
     --mouse-color: white;
-    --scroll-bar-color: ;
+    --scroll-bar-color: #cccccc;
+    --move-btns-hover-color: rgba(30, 36, 53, 0.16);
+    --menu-hover-color: rgb(126, 87, 194);
 }
 
 :root.theme3 {
@@ -30,11 +32,12 @@
     --secondary-text-color: #EEEEEE;
     --border-color: #00ADB5;
     --hover-color: #71C9CE;
-    --typing-area-color: #393E46;
     --font-1: 'Arvo', serif;
     --menu-color: ;
     --mouse-color: white;
-    --scroll-bar-color: ;
+    --scroll-bar-color: #79a7ca;
+    --move-btns-hover-color: rgba(30, 36, 53, 0.16);
+    --menu-hover-color: rgb(126, 87, 194);
 }
 
 :root.theme4 {
@@ -43,11 +46,12 @@
     --secondary-text-color: #2B2E4A;
     --border-color: #8785A2;
     --hover-color: #ffffff;
-    --typing-area-color: #404258;
     --font-1: 'Caudex', serif;
     --menu-color: ;
     --mouse-color: #6A2C70;
-    --scroll-bar-color: ;
+    --scroll-bar-color: #6A2C70;
+    --move-btns-hover-color: rgba(30, 36, 53, 0.16);
+    --menu-hover-color: rgb(126, 87, 194);
 }
 
 * {
@@ -188,7 +192,7 @@ a {
     background-color: transparent;
     border: none;
     border-color: var(--border-color);
-    color: white;
+    color: var(--secondary-text-color);
     cursor: pointer;
     display: none;
     gap: 0.8rem;
@@ -202,7 +206,7 @@ a {
 
 #nav-toggle-btn:hover,
 #nav-toggle-button:hover>span {
-    color: rgb(126, 87, 194);
+    color: var(--menu-hover-color);
 }
 
 #nav-toggle-btn>span,
@@ -216,6 +220,16 @@ main {
     flex-grow: 1;
     position: relative;
     overflow: hidden;
+}
+
+main::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+main::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: 5px;
 }
 
 main>article {
@@ -281,7 +295,7 @@ main>article[data-status="becoming-active-from-after"] {
 
 .right-btn:hover,
 .left-btn:hover {
-    background-color: var(--hover-color);
+    background-color: var(--move-btns-hover-color);
     cursor: pointer;
 }
 
@@ -582,6 +596,16 @@ main>article[data-status="becoming-active-from-after"] {
     perspective: 800px;
     overflow-y: scroll;
     height: 400px;
+}
+
+.container::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: 5px;
 }
 
 .pipe {
