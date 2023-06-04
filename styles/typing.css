@@ -391,7 +391,7 @@ nav {
     grid-row: 1 / span 3;
     /* margin: 2rem; */
     /* background-color: var(--typing-area-color); */
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     transition: all 300ms ease;
     /* border-radius: 5px; */
     padding: 0px 20px;
@@ -411,17 +411,21 @@ nav {
 } */
 
 #after-text {
-    /* position: absolute; */
-    width: 100%;
-    height: 100%;
     color: white;
     font-size: 3.5rem;
-    top: 50%;
-    left: 50%;
     text-align: center;
     font-family: var(--font-1);
-    transform: translate(-50%, -50%);
     opacity: 0.9;
+    margin-top: 20%;
+}
+
+#after-text span {
+    margin-top: 10px;
+    display: block;
+}
+
+#after-text span i {
+    cursor: pointer;
 }
 
 .hidden {
@@ -476,6 +480,7 @@ nav {
 }
 
 @keyframes blink {
+
     0%,
     100% {
         opacity: 0;
@@ -591,19 +596,19 @@ nav {
     height: 100%;
     width: 100%;
     padding: 2rem;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0, 0, 0, 0.75);
     z-index: 9999;
     align-items: center;
     justify-content: center;
     display: grid;
 }
 
-
-
 .inputOwnTextWrapper .heading {
     font-size: 1.8rem;
-    color: #646669;
+    color: white;
     pointer-events: none;
+    margin: auto;
+    font-family: var(--font-1);
 }
 
 .input-text {
@@ -612,11 +617,11 @@ nav {
     border: 1px solid #646669;
     outline: none;
     caret-color: yellow;
-    font-size: 1.5rem;
-    /* overflow-x: hidden; */
+    font-size: 1.4rem;
     overflow-y: scroll;
     border-radius: 5px;
     color: white;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .input-text::-webkit-scrollbar {
@@ -624,13 +629,12 @@ nav {
     width: 4px;
 }
 
-
 .input-text::-webkit-scrollbar-thumb {
     background-color: var(--main-text-color);
     border-radius: 5px;
 }
 
-.inputOwnTextWrapper > .button {
+.inputOwnTextWrapper>.button {
     background: #2c2e31;
     padding: 0.5rem;
     text-align: center;
@@ -638,15 +642,15 @@ nav {
     color: white;
     border-radius: 20px;
     cursor: pointer;
-    transition: background .125s,color .125s;
+    transition: background .125s, color .125s;
     letter-spacing: 0.1rem;
+    font-family: var(--font-1);
 }
 
-.inputOwnTextWrapper > .button:hover {
+.inputOwnTextWrapper>.button:hover {
     background: whitesmoke;
     color: #050a18;
 }
-
 
 .focus-popup-wrapper {
     position: fixed;
@@ -663,7 +667,7 @@ nav {
     z-index: 9999;
 }
 
-.focus-popup > div > div {
+.focus-popup>div>div {
     /* width: 50%; */
     padding: 1rem 2rem;
     /* height: 5rem; */
@@ -675,6 +679,12 @@ nav {
     font-size: 1.2rem;
     border-radius: 10px;
 }
+
+/* @media (max-width: 1200px) {
+    #after-text {
+        margin-top: ;
+    }
+} */
 
 @media (max-width: 800px) {
     .mouseCaret {
@@ -825,11 +835,10 @@ nav {
     }
 
     #after-text {
-        width: auto;
         font-size: 2.5rem;
     }
 
-    .focus-popup > div > div {
+    .focus-popup>div>div {
         margin-left: -10%;
         margin-top: -40%;
     }
@@ -856,15 +865,15 @@ nav {
         height: 150px;
     }
 
-    .inputOwnTextWrapper > .button {
+    .inputOwnTextWrapper>.button {
         font-size: 1.2rem;
     }
 
-    .focus-popup > div > div {
+    .focus-popup>div>div {
         margin-left: -10%;
         margin-top: -60%;
     }
-    
+
 }
 
 @media (max-width: 350px) {
@@ -880,7 +889,7 @@ nav {
         font-size: 1.2rem;
     }
 
-    .focus-popup > div > div {
+    .focus-popup>div>div {
         margin-left: -10%;
         margin-top: -80%;
     }
@@ -891,4 +900,3 @@ nav {
         display: none;
     }
 }
-

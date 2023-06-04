@@ -23,14 +23,13 @@ let originalString = str.textContent.replace(/\s+/g, " ").trim();
 
 let clock = 0;
 let clockActive = false;
-let liActiveValue = 0; 
-let inputStarted = false; 
-let clockHover = false; 
+let liActiveValue = 0;
+let inputStarted = false;
+let clockHover = false;
 let intervalId = null;
 
-let typedWords = 0;
-let correctWords = 0;
 let totalWords = 1;
+let totalCharsTyped = 0;
 let correctCharsTyped = 0;
 let currentWordTyping = 0;
 let timerForScore = true;
@@ -60,7 +59,7 @@ const capsMsg = document.querySelector('.caps-lock>p>span')
 const width = window.innerWidth || document.documentElement.clientWidth;
 const height = typingArea.getBoundingClientRect().height;
 console.log(height);
-maxLines = Math.floor((height-35)/36) - 3;
+maxLines = Math.floor((height - 35) / 36) - 3;
 console.log(maxLines);
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -89,14 +88,6 @@ input.addEventListener("keyup", function (event) {
     }
 });
 
-
-// document.addEventListener("keydown", function (event) {
-//     if (event.key === "Enter") {
-//         input.focus();
-//         typingArea.style.overflowY = 'hidden';
-//     }
-// });
-
 // document.addEventListener('click', (event) => {
 //     const clickedElement = event.target;
 //     if (clickedElement.tagName.toLowerCase() !== 'button' &&
@@ -106,7 +97,8 @@ input.addEventListener("keyup", function (event) {
 //         clickedElement.tagName.toLowerCase() !== 'input' &&
 //         clickedElement.tagName.toLowerCase() !== 'i' &&
 //         clickedElement.tagName.toLowerCase() !== 'span' &&
-//         !clickedElement.classList.contains('typing-area')) {
+//         !clickedElement.classList.contains('typing-area') &&
+//         !clickedElement.classList.contains('focus-popup-wrapper')) {
 
 //         if (!mouseCaret.classList.contains('clicked'))
 //             applyNextColorTheme();
@@ -119,7 +111,8 @@ input.addEventListener("keyup", function (event) {
 //         clickedElement.tagName.toLowerCase() !== 'input' &&
 //         clickedElement.tagName.toLowerCase() !== 'i' &&
 //         clickedElement.tagName.toLowerCase() !== 'span' &&
-//         !clickedElement.classList.contains('typing-area')) {
+//         !clickedElement.classList.contains('typing-area') &&
+//         !clickedElement.classList.contains('focus-popup-wrapper')) {
 
 //         mouseCaret.classList.add('clicked');
 //         setTimeout(function () {
@@ -127,6 +120,13 @@ input.addEventListener("keyup", function (event) {
 //         }, 800);
 //     }
 // });
+
+document.addEventListener('click', (event) => {
+    const reloadIcon = event.target.closest('#after-text span i');
+    if (reloadIcon) {
+        window.location.reload();
+    }
+});
 
 window.addEventListener('mousemove', (e) => {
     mouseCaret.style.top = e.pageY + 'px';
@@ -239,90 +239,90 @@ let firstWordLeft = document.querySelector(`.span0`).getBoundingClientRect().lef
 let firstWordTop = document.querySelector(".span0").getBoundingClientRect().top;
 
 input.addEventListener("keydown", (e) => {
-  if (e.ctrlKey && e.key === "Backspace") {
-    e.preventDefault(); // Prevent the default behavior of the key combination
-    return;
-  }
-  let ptr = input.value;
-  if (ptr.length < 1) {
-    return;
-  } //if no character is left
+    if (e.ctrlKey && e.key === "Backspace") {
+        e.preventDefault(); // Prevent the default behavior of the key combination
+        return;
+    }
+    let ptr = input.value;
+    if (ptr.length < 1) {
+        return;
+    } //if no character is left
 
-  if (e.key === "Backspace") {
-    let once = true;
-    let top = false;
-    let index = document.querySelector(
-      `p.given-text span.span${ptr.length - 1}`
-    );
-    // remove notTyped class from all chars till the place where space was entered
-    while (index.classList.contains("notTyped")) {
-      if (once) {
+    if (e.key === "Backspace") {
+        let once = true;
+        let top = false;
+        let index = document.querySelector(
+            `p.given-text span.span${ptr.length - 1}`
+        );
+        // remove notTyped class from all chars till the place where space was entered
+        while (index.classList.contains("notTyped")) {
+            if (once) {
+                let afterIndex = document.querySelector(
+                    `p.given-text span.span${ptr.length}`
+                );
+                let beforeIndex = document.querySelector(
+                    `p.given-text span.span${ptr.length - 2}`
+                );
+                let beforeIndexTop = beforeIndex.getBoundingClientRect().top;
+                let afterIndexTop = afterIndex.getBoundingClientRect().top;
+                if (index.getBoundingClientRect().top != afterIndexTop) {
+                    top = true;
+                    moveCaretBack(index);
+                } else if (index.getBoundingClientRect().top != beforeIndexTop) {
+                    top = true;
+                    moveCaretBack(beforeIndex);
+                    input.value = input.value.slice(0, -1);
+                }
+                once = false;
+            }
+            index.classList.remove("notTyped");
+            index.innerText = originalString[ptr.length - 1];
+            ptr = ptr.slice(0, -1);
+            index = document.querySelector(
+                `p.given-text span.span${ptr.length - 1}`
+            );
+            flag = true;
+        }
+        if (flag) {
+            // only if above loop ran
+            input.value = ptr;
+            input.value += originalString[ptr.length - 1];
+            let caretLeft = index.getBoundingClientRect().left - firstWordLeft + index.getBoundingClientRect().width;
+            caret.style.left = `${caretLeft}px`;
+            if (!top) {
+                let caretTop = index.getBoundingClientRect().top - firstWordTop + 35;
+                caret.style.top = `${caretTop}px`;
+            }
+            flag = false;
+            return;
+        } else {
+            index.classList.remove("right");
+            index.classList.remove("wrong");
+            let caretLeft = index.getBoundingClientRect().left - firstWordLeft;
+            caret.style.left = `${caretLeft}px`;
+            let caretTop = index.getBoundingClientRect().top - firstWordTop + 35;
+            caret.style.top = `${caretTop}px`;
+        }
+        if (ptr.length == 1) {
+            caret.style.left = "0px";
+        }
+
         let afterIndex = document.querySelector(
-          `p.given-text span.span${ptr.length}`
+            `p.given-text span.span${ptr.length}`
         );
         let beforeIndex = document.querySelector(
-          `p.given-text span.span${ptr.length - 2}`
+            `p.given-text span.span${ptr.length - 2}`
         );
         let beforeIndexTop = beforeIndex.getBoundingClientRect().top;
         let afterIndexTop = afterIndex.getBoundingClientRect().top;
         if (index.getBoundingClientRect().top != afterIndexTop) {
-          top = true;
-          moveCaretBack(index);
+            moveCaretBack(index);
         } else if (index.getBoundingClientRect().top != beforeIndexTop) {
-          top = true;
-          moveCaretBack(beforeIndex);
-          input.value = input.value.slice(0, -1);
+            moveCaretBack(beforeIndex);
+            input.value = input.value.slice(0, -1);
         }
-        once = false;
-      }
-      index.classList.remove("notTyped");
-      index.innerText = originalString[ptr.length - 1];
-      ptr = ptr.slice(0, -1);
-      index = document.querySelector(
-        `p.given-text span.span${ptr.length - 1}`
-      );
-      flag = true;
+        backspaced = true;
     }
-    if (flag) {
-      // only if above loop ran
-      input.value = ptr;
-      input.value += originalString[ptr.length - 1];
-      let caretLeft = index.getBoundingClientRect().left - firstWordLeft + index.getBoundingClientRect().width;
-      caret.style.left = `${caretLeft}px`;
-      if (!top) {
-        let caretTop = index.getBoundingClientRect().top - firstWordTop + 35;
-        caret.style.top = `${caretTop}px`;
-      }
-      flag = false;
-      return;
-    } else {
-      index.classList.remove("right");
-      index.classList.remove("wrong");
-      let caretLeft = index.getBoundingClientRect().left - firstWordLeft;
-      caret.style.left = `${caretLeft}px`;
-      let caretTop = index.getBoundingClientRect().top - firstWordTop + 35;
-      caret.style.top = `${caretTop}px`;
-    }
-    if (ptr.length == 1) {
-      caret.style.left = "0px";
-    }
-
-    let afterIndex = document.querySelector(
-      `p.given-text span.span${ptr.length}`
-    );
-    let beforeIndex = document.querySelector(
-      `p.given-text span.span${ptr.length - 2}`
-    );
-    let beforeIndexTop = beforeIndex.getBoundingClientRect().top;
-    let afterIndexTop = afterIndex.getBoundingClientRect().top;
-    if (index.getBoundingClientRect().top != afterIndexTop) {
-      moveCaretBack(index);
-    } else if (index.getBoundingClientRect().top != beforeIndexTop) {
-      moveCaretBack(beforeIndex);
-      input.value = input.value.slice(0, -1);
-    }
-    backspaced = true;
-  }
 });
 
 input.addEventListener("input", (e) => {
@@ -399,7 +399,7 @@ input.addEventListener("input", (e) => {
                 }
                 return;
             }
-            if (currentWordTyping >= TotalWords) {
+            if (currentWordTyping >= totalWords) {
                 final();
                 ended = true;
                 return;
@@ -517,48 +517,12 @@ function totalWordsInText(originalString) {
 }
 
 function Words() {
-    input.value = input.value.replace(/\s+/g, " ").trim();
-    let toCheckFirstWord = true;
-    let toCheckOtherWords = false;
-    for (let i = 0; i < input.value.length; i++) {
-        if (toCheckOtherWords === true)
-            toCheckFirstWord = true;
-        if (input.value[i] === ' ') {
-            typedWords++;
-            toCheckFirstWord = false;
-            toCheckOtherWords = true;
-        }
-    }
-    if (toCheckFirstWord === true && input.value.length < originalString.length)
-        typedWords++;
-    if (input.value.length >= originalString.length)
-        typedWords++;
-
-    let flag = true;
     for (let i = 0; i < input.value.length; i++) {
         let index = document.querySelector(`p.given-text span.span${i}`)
-        if ((input.value[i] !== originalString[i] && input.value[i] !== ' ') || index.classList.contains('notTyped')) {
-            flag = false;
-        }
-        if (flag === true && input.value[i] === ' ' && input.value[i] === originalString[i]) {
-            correctWords++;
-        }
-        if (flag === false && input.value[i] === ' ') {
-            flag = true;
-        }
-        if (flag === true && i + 1 === input.value.length && originalString[i + 1] === ' ')
-            correctWords++;
-        if (flag === true && i + 1 === originalString.length)
-            correctWords++;
-    }
-
-    for(let i=0; i < input.value.length; i++){
-        let index = document.querySelector(`p.given-text span.span${i}`)
-        if(input.value[i] === originalString[i] && !index.classList.contains('notTyped'))
+        if (input.value[i] === originalString[i] && !index.classList.contains('notTyped'))
             correctCharsTyped++;
     }
-    console.log(correctCharsTyped)
-    console.log(input.value.length);
+    totalCharsTyped = input.value.length;
 }
 
 function timer() {
@@ -600,14 +564,22 @@ function info() {
         else
             afterText.textContent = 'You Can Do Better!'
     }
+    const reload = document.createElement('i')
+    reload.classList.add('fa-solid', 'fa-rotate-right');
+    reload.style.color = '#ffffff';
+
+    const span = document.createElement('span');
+    span.appendChild(reload)
+
+    afterText.appendChild(span)
 }
 
 function final() {
     clearInterval(intervalId);
     input.blur();
     Words();
-    S = ((correctCharsTyped/5) / (cnt / 60)).toFixed(2);
-    A = (((correctWords / (cnt / 60)) * 100) / (typedWords / (cnt / 60))).toFixed(2);
+    S = ((correctCharsTyped / 5) / (cnt / 60)).toFixed(2);
+    A = ((correctCharsTyped / totalCharsTyped) * 100).toFixed(2);
     score.textContent = `${S} wpm`;
     accuracy.textContent = `${A} %`;
     timeSpent.textContent = `${(cnt / 60).toFixed(2)} min`;
@@ -616,20 +588,23 @@ function final() {
     caret.style.display = 'none';
     info();
     afterText.classList.remove('hidden');
-    console.log(input.textContent);
-    console.log(str);
     str.innerHTML = '';
+    str.style.display = 'none';
+    focusPopup.removeEventListener('click', focusPopupClickHandler);
+    document.removeEventListener('click', documentClickHandler);
+    inputArea.removeEventListener('click', clickHandler);
+    updateScoreDb();
 }
 
 function moveCaret(index) {
     let caretLeft =
-    index.getBoundingClientRect().left - firstWordLeft + index.getBoundingClientRect().width;
+        index.getBoundingClientRect().left - firstWordLeft + index.getBoundingClientRect().width;
     caret.style.left = `${caretLeft}px`;
     let caretTop = index.getBoundingClientRect().top - firstWordTop + 36;
     caret.style.top = `${caretTop}px`;
-  }
-  
-  function moveCaretDown(afterIndex, index) {
+}
+
+function moveCaretDown(afterIndex, index) {
     line++;
     console.log(line, totalLines);
     let caretLeft = 0;
@@ -637,54 +612,61 @@ function moveCaret(index) {
     let caretTop = afterIndex.getBoundingClientRect().top - firstWordTop + 36;
     caret.style.top = `${caretTop}px`;
     if (line > 2) {
-      if (line == 3) scrollDistance = 65;
-      else scrollDistance += 36;
-      if (totalLines - line <= maxLines) {
-      } else {
-        caret.style.top = `${nextLineTop}px`;
-        typingArea.scrollTop = scrollDistance;
-      }
+        if (line == 3) scrollDistance = 65;
+        else scrollDistance += 36;
+        if (totalLines - line <= maxLines) {
+        } else {
+            caret.style.top = `${nextLineTop}px`;
+            typingArea.scrollTop = scrollDistance;
+        }
     }
     console.log(scrollDistance);
-  }
-  
-  function moveCaretBack(index) {
+}
+
+function moveCaretBack(index) {
     if (line != 0) line--;
     let caretLeft = index.getBoundingClientRect().left - firstWordLeft;
     caret.style.left = `${caretLeft}px`;
     let caretTop = index.getBoundingClientRect().top - firstWordTop + 36;
     caret.style.top = `${caretTop}px`;
     if (line >= 2) {
-      if (line == 2) scrollDistance = 29;
-      else scrollDistance -= 36;
-      if (totalLines - line <= maxLines) {
-      } else {
-        caret.style.top = `${nextLineTop}px`;
-        typingArea.scrollTop = scrollDistance;
-      }
+        if (line == 2) scrollDistance = 29;
+        else scrollDistance -= 36;
+        if (totalLines - line <= maxLines) {
+        } else {
+            caret.style.top = `${nextLineTop}px`;
+            typingArea.scrollTop = scrollDistance;
+        }
     }
-  }
+}
 
+inputArea.addEventListener('click', clickHandler)
 
-inputArea.addEventListener('click', () => {
+function clickHandler() {
     popup.style.display = 'flex';
     typingArea.style.opacity = '0';
     inputText.textContent = '';
     inputText.focus();
-})
-
+    focusPopup.removeEventListener('click', focusPopupClickHandler);
+    document.removeEventListener('click', documentClickHandler);
+}
 
 popup.addEventListener('click', (event) => {
     if (!inputOwnTextWrapper.contains(event.target)) {
         popup.style.display = 'none';
         typingArea.style.opacity = '1';
+        focusPopup.addEventListener('click', focusPopupClickHandler);
+        document.addEventListener('click', documentClickHandler);
     }
 });
 
 function handlePopupInputButton() {
     let ownInputText = inputText.textContent;
-    if(ownInputText.length == 0){
-        inputText.textContent = "You haven't provided any text please provide some text to continue..."
+    if (ownInputText.length == 0) {
+        inputText.textContent = "Please input some text";
+    }
+    else if (inputText.textContent === "Please input some text") {
+        inputText.textContent = "";
     }
     else {
         originalString = ownInputText.replace(/\s+/g, " ").trim();
@@ -693,23 +675,52 @@ function handlePopupInputButton() {
         typingArea.style.opacity = '1';
         input.focus();
         input.textContent = '';
+        focusPopup.addEventListener('click', focusPopupClickHandler);
+        document.addEventListener('click', documentClickHandler);
     }
 }
 
+inputText.addEventListener('click', () => {
+    if (inputText.textContent === "Please input some text")
+        inputText.textContent = '';
+})
 
-focusPopup.addEventListener('click', () => {
+const focusPopupClickHandler = () => {
     input.focus();
     str.style.filter = 'blur(0px)';
     focusPopup.style.display = 'none';
-    // focusPopup.style.position = 'static';
     caret.style.backgroundColor = 'yellow';
-})
+};
 
-document.addEventListener('click', (event) => {
-    if(!focusPopup.contains(event.target)){
+const documentClickHandler = (event) => {
+    if (!focusPopup.contains(event.target)) {
         input.blur();
         focusPopup.style.display = 'flex';
         str.style.filter = 'blur(10px)';
         caret.style.backgroundColor = 'transparent';
     }
-})
+};
+
+focusPopup.addEventListener('click', focusPopupClickHandler);
+document.addEventListener('click', documentClickHandler);
+
+async function updateScoreDb() {
+    try {
+      const response = await fetch('http://localhost:8080/updateScore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          score: S,
+          accuracy: A
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update score');
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle the error appropriately, such as sending an error response to the client
+    }
+  }
