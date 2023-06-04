@@ -592,7 +592,12 @@ function final() {
     str.style.display = 'none';
     focusPopup.removeEventListener('click', focusPopupClickHandler);
     document.removeEventListener('click', documentClickHandler);
+<<<<<<< HEAD
+    inputArea.removeEventListener('click', clickHandler);
+    updateScoreDb();
+=======
     inputArea.removeEventListener('click', clickHandler)
+>>>>>>> 28731277ba619fa428b2293219deba6394ada5e8
 }
 
 function moveCaret(index) {
@@ -702,3 +707,24 @@ const documentClickHandler = (event) => {
 
 focusPopup.addEventListener('click', focusPopupClickHandler);
 document.addEventListener('click', documentClickHandler);
+
+async function updateScoreDb() {
+    try {
+      const response = await fetch('http://localhost:8080/updateScore', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          score: S,
+          accuracy: A
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update score');
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle the error appropriately, such as sending an error response to the client
+    }
+  }
