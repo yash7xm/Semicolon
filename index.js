@@ -210,6 +210,10 @@ app.post('/signIn', async (req, res, next) => {
 
 
 app.post('/updateScore', async (req, res) => {
+  if(sessionId === ''){
+    res.sendStatus(200);
+    return;
+  }
   const user = await User.findOne({ _id: req.session.user_id });
 
   const S = req.body.score;

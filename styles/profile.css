@@ -338,3 +338,18 @@ nav {
     width: 100%;
     height: 100%;
 }
+
+#calendar_basic {
+    width: 100%;
+    height: 100%;
+}
+
+#calendar_basic svg{
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+.show {
+    width: 0%;
+}

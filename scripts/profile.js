@@ -56,7 +56,7 @@ function drawBasic() {
 
     let dataArray = [];
     for (let i = 0; i < userData.score.length; i++) {
-        dataArray.push([i, parseInt(userData.score[i].wpm)]);
+        dataArray.push([i+1, parseInt(userData.score[i].wpm)]);
     }
     console.log(dataArray);
 
@@ -91,3 +91,28 @@ function drawBasic() {
 
     chart.draw(data, options);
 }
+
+google.charts.load("current", {packages:["calendar"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
+       dataTable.addRows([
+          [ new Date(2012, 3, 13), 1 ],
+          [ new Date(2012, 3, 14), 5 ],
+          [ new Date(2012, 3, 15), 2 ],
+          [ new Date(2012, 3, 16), 3 ],
+          [ new Date(2012, 3, 17), 4 ],
+        ]);
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+       var options = {
+         title: "",
+         calendar: { cellSize: 20 },
+       };
+
+       chart.draw(dataTable, options);
+   }
