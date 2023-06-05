@@ -195,7 +195,7 @@ app.post('/signIn', async (req, res, next) => {
       console.log(req.session.user_id)
       console.log(user._id)
       flag2 = true;
-      res.render('index', {sessionId});
+      res.redirect('/');
     }
     else {
       flag2 = false;
