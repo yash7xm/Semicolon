@@ -108,15 +108,6 @@ const Sem1 = new mongoose.Schema({
   });
   
   const User = mongoose.model('User', userSchema);
-
-//   const ScoreSchema = new mongoose.Schema([
-//     {
-//     wpm: String,
-//     accuracy: String
-//   },
-// ]);
-
-//   const Score = mongoose.model('Score', ScoreSchema);
   
   
   async function fetchData() {
@@ -240,6 +231,11 @@ app.post('/updateScore', async (req,res) => {
   await user.save();
   console.log(user);
   res.sendStatus(200);
+})
+
+app.get('/leadborad', async (req,res) => {
+  const users = await User.find({}).sort({ bestScore: -1 });
+  res.json(users);
 })
 
 

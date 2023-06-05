@@ -9,6 +9,7 @@ const nav = document.querySelector('nav');
 let scrollDownStop = false;
 let scrollTopStop = false;
 let activeIndex = 0;
+let users;
 
 
 window.addEventListener('mousemove', (e) => {
@@ -216,4 +217,46 @@ function getAppliedTheme() {
     var themes = ['theme1', 'theme2', 'theme3', 'theme4'];
     var appliedTheme = themes.find(theme => document.documentElement.classList.contains(theme));
     return appliedTheme;
+}
+
+fetchUsers();
+async function fetchUsers(){
+  fetch('http://localhost:8080/leadborad')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    users = data;
+    showLeaderBoard();
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+function showLeaderBoard(){
+    const list = document.querySelector('.top-list');
+
+    for(let i = 0; i < users.length && i < 10; i++){
+
+    const restList = document.createElement('div');
+    restList.classList.add('rest-list');
+
+    const rankNo = document.createElement('div');
+    rankNo.classList.add('rank-no');
+    rankNo.textContent = `${i+1}`;
+
+    const rankName = document.createElement('div');
+    rankName.classList.add('rank-name');
+    rankName.textContent = `${users[i].username}`;
+
+    const rankSpeed = document.createElement('div');
+    rankSpeed.classList.add('rank-speed');
+    rankSpeed.textContent  = `${users[i].bestScore}`;
+
+    restList.appendChild(rankNo);
+    restList.appendChild(rankName);
+    restList.appendChild(rankSpeed);
+
+    list.appendChild(restList);
+    }
 }
