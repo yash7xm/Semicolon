@@ -15,6 +15,8 @@
     
 </head>
 <body>
+    <div class="mouseCaret"></div>
+
     <nav data-toggled="false" data-transitionable="false">
         <div class="logo">
             <div class="logo-name">
@@ -43,7 +45,15 @@
         </div>
         <div class="profile">
             <div class="profile-text">
-                <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                        <% } else { %>
+                            <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                                    <% } %>
             </div>
         </div>
     </div>
@@ -104,10 +114,10 @@
 
     <div class="info">
         <div class="subjects-display subject-select">
-            <div value="0" style="color: yellow;"><%= data[0].sem[0].subjects[0].subjectName %></div>
-            <div value="1"><%= data[0].sem[0].subjects[1].subjectName %></div>
-            <div value="2"><%= data[0].sem[0].subjects[2].subjectName %></div>
-            <div value="3"><%= data[0].sem[0].subjects[3].subjectName %></div>
+            <div style="color: yellow;"><p value="0"><%= data[0].sem[0].subjects[0].subjectName %></p></div>
+            <div><p value="1"><%= data[0].sem[0].subjects[1].subjectName %></p></div>
+            <div><p value="2"><%= data[0].sem[0].subjects[2].subjectName %></p></div>
+            <div><p value="3"><%= data[0].sem[0].subjects[3].subjectName %></p></div>
         </div>
         <div class="topics">
             <% let topicIndex = 0; %>

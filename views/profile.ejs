@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <script src="https://kit.fontawesome.com/040eb06c51.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Space+Grotesk&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles/profile.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="brand-name">
+            <a href="http://localhost:8080/" class="grow-link">Semicolon</a>
+        </div>
+        <div class="nav-mobile-section">
+            <div class="main-btns">
+                <div class="notes grow-link">
+                    <a href="http://localhost:8080/read">READ</a>
+                </div>
+                <div class="test grow-link">
+                    <a href="http://localhost:8080/test">TEST</a>
+                </div>
+            </div>
+            <div class="about">
+                <div class="home-link-icon">
+                    <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="about-link-icon">
+                    <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
+                </div>
+                <div class="github-link-icon">
+                    <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="profile">
+                <a href="http://localhost:8080/logout" class="profile-link grow-link">LOGOUT</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="user">
+            <div class="upper">
+                <div class="photo">
+                    <img src="/images/icon.png" alt="profile-icon"><i class="fa-solid fa-pen-to-square"></i>
+                </div>
+                <div class="user-info">
+                    <div class="name">
+                        <%= userData.name %>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <div class="username">
+                        <%= userData.username %>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="best-score">
+                    Best Score: <span>
+                        <%= userData.bestScore %> wpm
+                    </span>
+                </div>
+                <div class="rank">
+                    Rank: <span>#<%= userData.rank %></span>
+                </div>
+                <div class="completed-tests">
+                    Tests Completed: <span>
+                        <%= userData.testsTaken %>
+                    </span>
+                </div>
+                <div class="joined-date">
+                    Date joined: <span>
+                        <%= userData.joined %>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="review">
+            <p><strong>Leave a review:</strong></p>
+            <div class="text-area">Max 80 chars long</div>
+            <div class="btns">
+                <a class="edit" href="#" onclick="return false;">Edit</a>
+                <a class="submit" href="#" onclick="return false;">Submit</a>
+            </div>
+        </div>
+        <div class="graph">
+            <div id="chart_div"></div>
+        </div>
+        <div class="map">
+        </div>
+    </div>
+
+    <script src="/scripts/profile.js"></script>
+</body>
+
+</html>

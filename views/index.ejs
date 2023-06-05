@@ -46,7 +46,15 @@
             </div>
             <div class="profile">
                 <div class="profile-text">
-                    <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                    <% if (typeof sessionId !=='undefined' ) { %>
+                        <% if (!sessionId) { %>
+                            <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                            <% } else { %>
+                                <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
+                                <% } %>
+                                    <% } else { %>
+                                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                                        <% } %>
                 </div>
             </div>
         </div>

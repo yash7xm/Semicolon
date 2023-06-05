@@ -19,7 +19,7 @@
     <nav data-toggled="false" data-transitionable="false">
         <div class="logo">
             <div class="logo-name">
-                <a href="http://127.0.0.1:5500/index.html" class="grow-link">Semicolon</a>
+                <a href="http://localhost:8080/" class="grow-link">Semicolon</a>
             </div>
         </div>
         <div class="nav-mobile-section">
@@ -44,7 +44,15 @@
         </div>
         <div class="profile">
             <div class="profile-text">
-                <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                <% if (typeof sessionId !=='undefined' ) { %>
+                    <% if (!sessionId) { %>
+                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                        <% } else { %>
+                            <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
+                            <% } %>
+                                <% } else { %>
+                                    <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                                    <% } %>
             </div>
         </div>
     </div>
