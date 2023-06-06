@@ -67,6 +67,7 @@ const Sem1 = new mongoose.Schema({
 
 const Sem1Notes = mongoose.model('Sem1Notes', Sem1);
 
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -83,13 +84,15 @@ const userSchema = new mongoose.Schema({
   },
   score: [
     {
-      // type: mongoose.Schema.Types.ObjectId,
-      // ref: 'Score'
       wpm: {
         type: String
       },
       accuracy: {
         type: String
+      },
+      date: {
+        type: String,
+        default: moment().format("YYYY MM DD")
       }
     }
   ],
@@ -108,8 +111,18 @@ const userSchema = new mongoose.Schema({
   rank: {
     type: Number,
     default: 0
+  },
+  photoNumber: {
+    type: Number,
+    default: 1
+  },
+  message: {
+    type: String,
+    maxlength: 80,
+    default: ''
   }
 });
+
 
 const User = mongoose.model('User', userSchema);
 
@@ -261,7 +274,8 @@ app.get('/userfind', async (req, res) => {
 app.get('/profile', async (req, res) => {
   try {
     userData = await User.findOne({ _id: sessionId });
-    console.log(userData);
+    // console.log(userData);
+    console.log(moment().format("YYYY MM DD"));
     res.render('profile', {userData})
   } catch (error) {
     console.error(error);
