@@ -270,15 +270,9 @@ app.get('/profile', async (req, res) => {
 });
 
 app.get('/logout', async (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Error destroying session:', err);
-      res.sendStatus(500);
-    } else {
-      sessionId = '';
-      res.redirect('/');
-    }
-  });
+  res.clearCookie('userId');
+  sessionId = '';
+  res.redirect('/');
 });
 
 
