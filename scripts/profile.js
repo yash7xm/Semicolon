@@ -141,7 +141,6 @@ function drawChart() {
  var options = {
    title: "",
    height: 500,
-   width: 2000,
    legend: 'none',
    noDataPattern: {
      backgroundColor: 'transparent',
@@ -176,7 +175,7 @@ stroke: 'yellow',
 strokeOpacity: 0.5,
 strokeWidth: 1
 },
-cellSize: 20,
+cellSize: 18,
 yearLabel: {
   fontName: 'Times-Roman',
   fontSize: 32,
