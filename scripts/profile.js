@@ -35,6 +35,7 @@ async function fetchUserData() {
         .then(response => response.json())
         .then(data => {
             userData = data;
+            console.log(userData);
             google.charts.setOnLoadCallback(drawBasic);
         })
         .catch(error => {
@@ -95,8 +96,9 @@ function drawBasic() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('fetch)');
     fetchUserData();
-  });
+});
 
 window.addEventListener('resize', () => {
     window.location.reload();
@@ -138,7 +140,8 @@ function drawChart() {
 
  var options = {
    title: "",
-   height: 350,
+   height: 500,
+   width: 2000,
    legend: 'none',
    noDataPattern: {
      backgroundColor: 'transparent',
@@ -173,7 +176,7 @@ stroke: 'yellow',
 strokeOpacity: 0.5,
 strokeWidth: 1
 },
-cellSize: 18,
+cellSize: 20,
 yearLabel: {
   fontName: 'Times-Roman',
   fontSize: 32,
@@ -187,3 +190,5 @@ yearLabel: {
 
  chart.draw(dataTable, options);
 }
+
+console.log(document.cookie);

@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 const session = require('express-session');
-const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
 let data = '';
 let userData = '';
 let sessionId = '';
@@ -27,7 +27,7 @@ mongoose
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
-app.use(methodOverride('_method'));
+app.use(cookieParser());
 app.use(session({
   secret: '12121212',
   resave: false,
@@ -113,6 +113,11 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+app.use((req,res,next) => {
+  sessionId = req.cookies.userId;
+  next();
+})
+
 
 async function fetchData() {
   data = await Sem1Notes.find({});
@@ -190,10 +195,9 @@ app.post('/signIn', async (req, res, next) => {
     const user = await User.findOne({ username });
     const validPassword = await bcrypt.compare(password, user.password);
     if (validPassword) {
-      req.session.user_id = user._id;
-      sessionId = req.session.user_id;
-      console.log(req.session.user_id)
-      console.log(user._id)
+      res.cookie('userId', user._id, { maxAge: 30 * 24 * 60 * 60 * 1000 });
+      sessionId = res.cookie.userId;
+      console.log(sessionId);
       flag2 = true;
       res.redirect('/');
     }
@@ -214,7 +218,7 @@ app.post('/updateScore', async (req, res) => {
     res.sendStatus(200);
     return;
   }
-  const user = await User.findOne({ _id: req.session.user_id });
+  const user = await User.findOne({ _id: sessionId });
 
   const S = req.body.score;
   const A = req.body.accuracy;
@@ -232,6 +236,8 @@ app.post('/updateScore', async (req, res) => {
   if (S > bestScore)
     user.bestScore = S;
 
+  await user.save();
+
   const users = await User.find({}).sort({ bestScore: -1 });
 
   let rank = 1;
@@ -241,8 +247,7 @@ app.post('/updateScore', async (req, res) => {
     rank++;
   }
 
-  await user.save();
-  console.log(user);
+  // console.log(user);
   res.sendStatus(200);
 })
 
@@ -255,9 +260,8 @@ app.get('/userfind', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
   try {
-    userData = await User.findOne({ _id: req.session.user_id });
-    console.log(req.session.user_id)
-    // res.send(userData)
+    userData = await User.findOne({ _id: sessionId });
+    console.log(userData);
     res.render('profile', {userData})
   } catch (error) {
     console.error(error);
@@ -276,6 +280,8 @@ app.get('/logout', async (req, res) => {
     }
   });
 });
+
+
 
 app.get('/graphData', async (req,res) => {
   res.json(userData);
