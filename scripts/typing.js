@@ -727,3 +727,10 @@ async function updateScoreDb() {
     }
 
   }
+
+
+const randomTest = document.querySelector('.test');
+
+randomTest.addEventListener('click', () => {
+    console.log('test');
+})
