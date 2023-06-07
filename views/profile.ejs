@@ -21,17 +21,20 @@
 
 <body>
 
-    <nav>
-        <div class="brand-name">
-            <a href="http://localhost:8080/" class="grow-link">Semicolon</a>
+  
+    <nav data-toggled="false" data-transitionable="false">
+        <div class="logo">
+            <div class="logo-name">
+                <a href="/" class="grow-link">Semicolon</a>
+            </div>
         </div>
         <div class="nav-mobile-section">
-            <div class="main-btns">
-                <div class="notes grow-link">
-                    <a href="http://localhost:8080/read">READ</a>
+            <div class="features">
+                <div class="read-link">
+                    <a href="http://localhost:8080/read" class="grow-link">READ</a>
                 </div>
-                <div class="test grow-link">
-                    <a href="http://localhost:8080/test">TEST</a>
+                <div class="test-link">
+                    <a href="http://localhost:8080/test" class="grow-link">TEST</a>
                 </div>
             </div>
             <div class="about">
@@ -46,10 +49,18 @@
                 </div>
             </div>
             <div class="profile">
-                <a href="http://localhost:8080/logout" class="profile-link grow-link">LOGOUT</a>
+                <div class="profile-text">
+                        
+    <a href="http://localhost:8080/logout" class="grow-link">LOGOUT</a>
+                </div>
             </div>
         </div>
+        <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
+            <span>Menu</span>
+            <i class="fa-solid fa-bars"></i>
+        </button>
     </nav>
+
 
     <div class="content">
         <div class="user">
@@ -59,8 +70,10 @@
                 </div>
                 <div class="user-info">
                     <div class="name">
-                        <%= userData.name %>
-                            <i class="fa-solid fa-pen-to-square"></i>
+                        <span>
+                            <%= userData.name %>
+                        </span>
+                        <i class="fa-solid fa-pen-to-square name-edit-btn"></i>
                     </div>
                     <div class="username">
                         <%= userData.username %>
@@ -68,13 +81,13 @@
                 </div>
             </div>
             <div class="bottom">
+                <div class="rank">
+                    Rank: <span>#<%= userData.rank %></span>
+                </div>
                 <div class="best-score">
                     Best Score: <span>
                         <%= userData.bestScore %> wpm
                     </span>
-                </div>
-                <div class="rank">
-                    Rank: <span>#<%= userData.rank %></span>
                 </div>
                 <div class="completed-tests">
                     Tests Completed: <span>
@@ -82,25 +95,38 @@
                     </span>
                 </div>
                 <div class="joined-date">
-                    Date joined: <span>
+                    Member since: <span>
                         <%= userData.joined %>
                     </span>
                 </div>
             </div>
         </div>
         <div class="review">
-            <p><strong>Leave a review:</strong></p>
-            <div class="text-area">Max 80 chars long</div>
+            <p class="heading"><strong>Leave a review:</strong></p>
+            <div class="text-area">
+                <p>
+                    <% if (!userData.message) { %>
+                        Max 80 chars long
+                        <% } else { %>
+                            <%= userData.message %>
+                                <% } %>
+                </p>
+                <div class="thanks-msg hidden">
+                    <p>Thank You for your Feedback!</p>
+                </div>
+            </div>
             <div class="btns">
                 <a class="edit" href="#" onclick="return false;">Edit</a>
                 <a class="submit" href="#" onclick="return false;">Submit</a>
             </div>
         </div>
         <div class="graph">
-            <div id="chart_div"></div>
+                <div id="chart_div"></div>
         </div>
         <div class="map">
-            <div id="calendar_basic"></div>
+            <div class="heatmap">
+                <div id="calendar_basic"></div>
+            </div>
         </div>
     </div>
 

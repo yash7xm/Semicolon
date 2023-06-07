@@ -342,6 +342,7 @@ article > div {
     }
 }
 
+
 @media(max-width: 800px) {
     nav {
         justify-content: space-between;
@@ -417,6 +418,14 @@ article > div {
 
     #nav-toggle-btn {
         display: flex;
+    }
+
+    .about a {
+        font-size: 1.5rem;
+    }
+
+    .profile a {
+        font-size: 2rem;
     }
 
 }

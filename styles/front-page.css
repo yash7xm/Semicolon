@@ -40,7 +40,7 @@
     --menu-hover-color: rgb(126, 87, 194);
 }
 
-:root.theme4 {
+/* :root.theme4 {
     --background-color: #FFE2E2;
     --main-text-color: #6A2C70;
     --secondary-text-color: #2B2E4A;
@@ -52,7 +52,7 @@
     --scroll-bar-color: #6A2C70;
     --move-btns-hover-color: rgba(30, 36, 53, 0.16);
     --menu-hover-color: rgb(126, 87, 194);
-}
+} */
 
 * {
     padding: 0;
@@ -664,7 +664,7 @@ main>article[data-status="becoming-active-from-after"] {
 
 .label div {
     color: white;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-family: 'Space Grotesk', sans-serif;
     padding: 0rem 2rem;
 }

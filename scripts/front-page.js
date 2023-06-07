@@ -204,7 +204,7 @@ document.addEventListener('click', (event) => {
 });
 
 function applyNextColorTheme() {
-    var themes = ['theme1', 'theme2', 'theme3', 'theme4'];
+    var themes = ['theme1', 'theme2', 'theme3'];
     var currentTheme = getAppliedTheme();
     document.documentElement.classList.remove(currentTheme);
     var currentIndex = themes.indexOf(currentTheme);
@@ -214,7 +214,7 @@ function applyNextColorTheme() {
 }
 
 function getAppliedTheme() {
-    var themes = ['theme1', 'theme2', 'theme3', 'theme4'];
+    var themes = ['theme1', 'theme2', 'theme3'];
     var appliedTheme = themes.find(theme => document.documentElement.classList.contains(theme));
     return appliedTheme;
 }

@@ -37,8 +37,6 @@ app.use(session({
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 
-
-
 const Sem1 = new mongoose.Schema({
   sem:
     [
@@ -67,7 +65,6 @@ const Sem1 = new mongoose.Schema({
 
 const Sem1Notes = mongoose.model('Sem1Notes', Sem1);
 
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -92,7 +89,7 @@ const userSchema = new mongoose.Schema({
       },
       date: {
         type: String,
-        default: moment().format("YYYY MM DD")
+        default: moment().format('YYYY MM DD')
       }
     }
   ],
@@ -123,14 +120,12 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-
 const User = mongoose.model('User', userSchema);
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   sessionId = req.cookies.userId;
   next();
 })
-
 
 async function fetchData() {
   data = await Sem1Notes.find({});
@@ -139,7 +134,6 @@ async function fetchData() {
 app.get('/dog', async (req, res) => {
   res.json(data);
 })
-
 
 app.get('/read', async (req, res) => {
   res.render('read', { data, sessionId });
@@ -170,7 +164,7 @@ app.post('/showPost', (req, res) => {
   topicIndex = req.body.topicIndex;
   subjectIndex = req.body.subjectIndex;
   unitIndex = req.body.unitIndex;
-  console.log(topicIndex, unitIndex, subjectIndex);
+  // console.log(topicIndex, unitIndex, subjectIndex);
   res.sendStatus(200);
 })
 
@@ -210,7 +204,7 @@ app.post('/signIn', async (req, res, next) => {
     if (validPassword) {
       res.cookie('userId', user._id, { maxAge: 30 * 24 * 60 * 60 * 1000 });
       sessionId = res.cookie.userId;
-      console.log(sessionId);
+      // console.log(res.cookie.userId);
       flag2 = true;
       res.redirect('/');
     }
@@ -224,10 +218,8 @@ app.post('/signIn', async (req, res, next) => {
   }
 })
 
-
-
 app.post('/updateScore', async (req, res) => {
-  if(sessionId === ''){
+  if (sessionId === '') {
     res.sendStatus(200);
     return;
   }
@@ -264,6 +256,29 @@ app.post('/updateScore', async (req, res) => {
   res.sendStatus(200);
 })
 
+app.post('/updateMsg', async (req, res) => {
+  try {
+    const msg = req.body.Msg;
+    userData.message = msg;
+    await userData.save();
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating message');
+  }
+});
+
+app.post('/updateName', async (req, res) => {
+  try {
+    const name = req.body.Name;
+    userData.name = name;
+    await userData.save();
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating name');
+  }
+});
 
 app.get('/userfind', async (req, res) => {
   const user = await User.find({});
@@ -274,9 +289,9 @@ app.get('/userfind', async (req, res) => {
 app.get('/profile', async (req, res) => {
   try {
     userData = await User.findOne({ _id: sessionId });
-    // console.log(userData);
-    console.log(moment().format("YYYY MM DD"));
-    res.render('profile', {userData})
+    // console.log(req.session.user_id)
+    // res.send(userData)
+    res.render('profile', { userData })
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -289,19 +304,17 @@ app.get('/logout', async (req, res) => {
   res.redirect('/');
 });
 
-
-
-app.get('/graphData', async (req,res) => {
+app.get('/graphData', async (req, res) => {
   res.json(userData);
 })
 
-app.get('/leadborad', async (req,res) => {
+app.get('/leadborad', async (req, res) => {
   const users = await User.find({}).sort({ bestScore: -1 });
   res.json(users);
 })
 
 app.get("/", async (req, res) => {
-  res.render('index', {sessionId});
+  res.render('index', { sessionId });
   if (data == '')
     await fetchData();
 })

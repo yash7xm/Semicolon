@@ -27,6 +27,7 @@ let liActiveValue = 0;
 let inputStarted = false;
 let clockHover = false;
 let intervalId = null;
+let timerIntervalId = null;
 
 let totalWords = 1;
 let totalCharsTyped = 0;
@@ -58,9 +59,9 @@ const capsMsg = document.querySelector('.caps-lock>p>span')
 
 const width = window.innerWidth || document.documentElement.clientWidth;
 const height = typingArea.getBoundingClientRect().height;
-console.log(height);
+// console.log(height);
 maxLines = Math.floor((height - 35) / 36) - 3;
-console.log(maxLines);
+// console.log(maxLines);
 
 document.addEventListener('DOMContentLoaded', function () {
     var defaultTheme = 'theme1';
@@ -77,7 +78,7 @@ window.addEventListener('resize', () => {
     location.reload();
 })
 
-console.log(width);
+// console.log(width);
 input.addEventListener("keyup", function (event) {
     if (event.getModifierState("CapsLock")) {
         capsLockIndicator.style.visibility = 'visible';
@@ -338,7 +339,7 @@ input.addEventListener("input", (e) => {
         return;
     }
 
-    if (input.value.length > 0 && clockActive == true && clock != 0) {
+    if (input.value.length > 0 && clockActive === true && clock !== 0) {
         clockActive = false;
         normalTimer = false;
         startTimerForClock();
@@ -432,6 +433,10 @@ input.addEventListener("input", (e) => {
     }
 });
 
+input.addEventListener('paste', (event) => {
+    event.preventDefault();
+})
+
 time.addEventListener('click', () => {
     if (inputStarted === false) {
         if (clockActive === false) {
@@ -489,18 +494,19 @@ timerSet.forEach((item) => {
 });
 
 function startTimerForClock() {
-    setTimeout(() => {
+    timerIntervalId = setInterval(() => {
         if (ended === true) {
+            clearInterval(timerIntervalId);
             return;
         }
+        // console.log(clock);
         clock--;
         stopWatch.innerText = clock;
-        stopWatch.classList.remove('liveTimeEffects')
+        stopWatch.classList.remove('liveTimeEffects');
         if (clock === 3 || clock === 2 || clock === 1) {
-            stopWatch.classList.add('liveTimeEffects')
+            stopWatch.classList.add('liveTimeEffects');
         }
-        if (clock != 0) startTimerForClock();
-        else {
+        if (clock === 0) {
             if (ended === false) {
                 final();
             }
@@ -566,16 +572,17 @@ function info() {
     }
     const reload = document.createElement('i')
     reload.classList.add('fa-solid', 'fa-rotate-right');
-    reload.style.color = '#ffffff';
+    reload.style.color = '#ffd700';
 
     const span = document.createElement('span');
-    span.appendChild(reload)
+    span.appendChild(reload);
 
-    afterText.appendChild(span)
+    afterText.appendChild(span);
 }
 
 function final() {
     clearInterval(intervalId);
+    clearInterval(timerIntervalId);
     input.blur();
     Words();
     S = ((correctCharsTyped / 5) / (cnt / 60)).toFixed(2);
@@ -608,7 +615,7 @@ function moveCaret(index) {
 
 function moveCaretDown(afterIndex, index) {
     line++;
-    console.log(line, totalLines);
+    // console.log(line, totalLines);
     let caretLeft = 0;
     caret.style.left = `${caretLeft}px`;
     let caretTop = afterIndex.getBoundingClientRect().top - firstWordTop + 36;
@@ -622,7 +629,7 @@ function moveCaretDown(afterIndex, index) {
             typingArea.scrollTop = scrollDistance;
         }
     }
-    console.log(scrollDistance);
+    // console.log(scrollDistance);
 }
 
 function moveCaretBack(index) {
@@ -663,6 +670,7 @@ popup.addEventListener('click', (event) => {
 });
 
 function handlePopupInputButton() {
+    input.blur();
     let ownInputText = inputText.textContent;
     if (ownInputText.length == 0) {
         inputText.textContent = "Please input some text";
@@ -672,6 +680,8 @@ function handlePopupInputButton() {
     }
     else {
         originalString = ownInputText.replace(/\s+/g, " ").trim();
+        input.value = '';
+        caret.style.left = '0';
         makeHtml(originalString);
         popup.style.display = 'none';
         typingArea.style.opacity = '1';
@@ -679,13 +689,42 @@ function handlePopupInputButton() {
         input.textContent = '';
         focusPopup.addEventListener('click', focusPopupClickHandler);
         document.addEventListener('click', documentClickHandler);
+        reset();
     }
+}
+
+function reset() {
+    clearInterval(intervalId);
+    clearInterval(timerIntervalId);
+    clock = 0;
+    cnt = 0;
+    stopWatch.innerText = '0';
+    inputStarted = false;
+    clockActive = false;
+    clockHover = true;
+    timerForScore = true;
+    liActiveValue = 0;
+    ended = false;
+    normalTimer = true;
+    time.style.color = 'var(--main-text-color)';
+    timerSet.forEach((item) => {
+        item.style.color = 'var(--main-text-color)';
+    });
+    currentWordTyping = 0;
+    totalWords = 1;
+    totalWordsInText(originalString);
 }
 
 inputText.addEventListener('click', () => {
     if (inputText.textContent === "Please input some text")
         inputText.textContent = '';
 })
+
+inputText.addEventListener('paste', (event) => {
+    event.preventDefault();
+    const text = event.clipboardData.getData('text/plain');
+    inputText.textContent = text;
+});
 
 const focusPopupClickHandler = () => {
     input.focus();
@@ -708,29 +747,20 @@ document.addEventListener('click', documentClickHandler);
 
 async function updateScoreDb() {
     try {
-      const response = await fetch('http://localhost:8080/updateScore', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          score: S,
-          accuracy: A
-        }),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to update score');
-      }
+        const response = await fetch('http://localhost:8080/updateScore', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                score: S,
+                accuracy: A
+            }),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update score');
+        }
     } catch (error) {
-      console.error(error);
-      // Handle the error appropriately, such as sending an error response to the client
+        console.error(error);
     }
-
-  }
-
-
-const randomTest = document.querySelector('.test');
-
-randomTest.addEventListener('click', () => {
-    console.log('test');
-})
+}
