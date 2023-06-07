@@ -122,8 +122,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   sessionId = req.cookies.userId;
+  if (data == '') await fetchData();
   next();
 })
 
@@ -315,8 +316,7 @@ app.get('/leadborad', async (req, res) => {
 
 app.get("/", async (req, res) => {
   res.render('index', { sessionId });
-  if (data == '')
-    await fetchData();
+  
 })
 
 app.listen('8080', () => {
