@@ -603,6 +603,7 @@ a {
     height: 100%;
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -615,7 +616,6 @@ a {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-x: scroll;
 }
 
 #calendar_basic svg{
@@ -624,7 +624,6 @@ a {
     height: 100%;
     top: 50%;
     left: 50%;
-    overflow-x: scroll;
     transform: translate(-50%, -50%);
 } 
        

@@ -276,6 +276,7 @@ function drawChart() {
         title: "",
         legend: 'none',
         width: '1100',
+        height: '450',
         noDataPattern: {
             backgroundColor: 'transparent',
             color: '#050a18',
