@@ -247,7 +247,7 @@ function showLeaderBoard(){
 
     const rankName = document.createElement('div');
     rankName.classList.add('rank-name');
-    rankName.textContent = `${users[i].username}`;d
+    rankName.textContent = `${users[i].username}`;
 
     const rankSpeed = document.createElement('div');
     rankSpeed.classList.add('rank-speed');

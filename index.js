@@ -124,7 +124,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-const randomData = new mongoose.Schema({
+const Random = new mongoose.Schema({
   data: [
       {
           content: String
@@ -132,17 +132,17 @@ const randomData = new mongoose.Schema({
   ]
 })
 
-const randomdata = mongoose.model('randomdata', randomData);
+const RandomData = mongoose.model('RandomData', Random);
 
 app.use(async (req, res, next) => {
   sessionId = req.cookies.userId;
-  if(radata == '') radata = await randomdata.find({});
   if (data == '') await fetchData();
   next();
 })
 
 async function fetchData() {
   data = await Sem1Notes.find({});
+  radata = await RandomData.find({});
 }
 
 app.get('/dog', async (req, res) => {
