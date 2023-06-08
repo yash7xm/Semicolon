@@ -11,6 +11,8 @@ const moment = require('moment');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 let data = '';
+let rdata = '';
+let radata = '';
 let userData = '';
 let sessionId = '';
 let topicIndex = 0, subjectIndex = 0, unitIndex = 0, content;
@@ -122,8 +124,19 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+const randomData = new mongoose.Schema({
+  data: [
+      {
+          content: String
+      },
+  ]
+})
+
+const randomdata = mongoose.model('randomdata', randomData);
+
 app.use(async (req, res, next) => {
   sessionId = req.cookies.userId;
+  if(radata == '') radata = await randomdata.find({});
   if (data == '') await fetchData();
   next();
 })
@@ -141,7 +154,9 @@ app.get('/read', async (req, res) => {
 })
 
 app.get('/test', (req, res) => {
-  res.render('typing', { content, sessionId });
+  const randomNumber = Math.floor(Math.random() * 15);
+  rdata = radata[0].data[randomNumber].content;
+  res.render('typing', { content, sessionId, rdata });
 })
 
 app.post('/topicType', (req, res) => {
@@ -165,7 +180,6 @@ app.post('/showPost', (req, res) => {
   topicIndex = req.body.topicIndex;
   subjectIndex = req.body.subjectIndex;
   unitIndex = req.body.unitIndex;
-  // console.log(topicIndex, unitIndex, subjectIndex);
   res.sendStatus(200);
 })
 
@@ -290,8 +304,6 @@ app.get('/userfind', async (req, res) => {
 app.get('/profile', async (req, res) => {
   try {
     userData = await User.findOne({ _id: sessionId });
-    // console.log(req.session.user_id)
-    // res.send(userData)
     res.render('profile', { userData })
   } catch (error) {
     console.error(error);
@@ -316,7 +328,6 @@ app.get('/leadborad', async (req, res) => {
 
 app.get("/", async (req, res) => {
   res.render('index', { sessionId });
-  
 })
 
 app.listen('8080', () => {
