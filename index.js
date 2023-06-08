@@ -155,8 +155,8 @@ app.get('/read', async (req, res) => {
 
 app.get('/test', (req, res) => {
   const randomNumber = Math.floor(Math.random() * 15);
-  rdata = radata[0].data[randomNumber].content;
-  res.render('typing', { content, sessionId, rdata });
+  content = radata[0].data[randomNumber].content;
+  res.render('typing', { content, sessionId });
 })
 
 app.post('/topicType', (req, res) => {
