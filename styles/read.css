@@ -292,7 +292,7 @@ a {
 }
 
 .topics {
-    flex-grow: 1;
+    width: calc(100vw - 100vw/3);
     padding: 1rem;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -355,6 +355,21 @@ a {
 
 span {
     color: rgb(126, 87, 194);
+}
+
+.message-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+
+}
+
+.message {
+    font-size: 1.5rem;
+    color: yellow;
 }
 
 @media(max-width: 800px) {
