@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,16 @@
     <link rel="stylesheet" href="/styles/show.css">
     <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    
+    <div class="mouseCaret"></div>
+
     <nav data-toggled="false" data-transitionable="false">
         <div class="logo">
             <div class="logo-name">
@@ -23,39 +26,39 @@
             </div>
         </div>
         <div class="nav-mobile-section">
-        <div class="features">
-            <div class="read-link">
-                <a href="http://localhost:8080/read" class="grow-link">READ</a>
+            <div class="features">
+                <div class="read-link">
+                    <a href="http://localhost:8080/read" class="grow-link">READ</a>
+                </div>
+                <div class="test-link">
+                    <a href="#" onclick="return false;" class="grow-link">TEST</a>
+                </div>
             </div>
-            <div class="test-link">
-                <a href="#" onclick="return false;" class="grow-link">TEST</a>
+            <div class="about">
+                <div class="home-link-icon">
+                    <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="about-link-icon">
+                    <a href="#" class="border-link" onclick="return false;"><i class="fa-solid fa-circle-info"></i></a>
+                </div>
+                <div class="github-link-icon">
+                    <a href="https://github.com/semicolon-2023/Semicolon" class="border-link"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-text">
+                    <% if (typeof sessionId !=='undefined' ) { %>
+                        <% if (!sessionId) { %>
+                            <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                            <% } else { %>
+                                <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
+                                <% } %>
+                                    <% } else { %>
+                                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                                        <% } %>
+                </div>
             </div>
         </div>
-        <div class="about">
-            <div class="home-link-icon">
-               <a href="http://localhost:8080/" class="border-link"><i class="fa-solid fa-house"></i></a>
-            </div>
-            <div class="about-link-icon">
-                <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
-            </div>
-            <div class="github-link-icon">
-                <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </div>
-        <div class="profile">
-            <div class="profile-text">
-                <% if (typeof sessionId !=='undefined' ) { %>
-                    <% if (!sessionId) { %>
-                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
-                        <% } else { %>
-                            <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
-                            <% } %>
-                                <% } else { %>
-                                    <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
-                                    <% } %>
-            </div>
-        </div>
-    </div>
         <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
             <span>Menu</span>
             <i class="fa-solid fa-bars"></i>
@@ -66,12 +69,16 @@
         <article data-index="0" data-status="active">
             <div class="heading-section">
                 <div class="heading">
-                    <p> <%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].name %></p>
+                    <p>
+                        <%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].name %>
+                    </p>
                 </div>
             </div>
             <div class="text-section">
                 <div class="text">
-                    <p><%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].content %></p>
+                    <p>
+                        <%= data[0].sem[0].subjects[subjectIndex].units[unitIndex].topics[topicIndex].content %>
+                    </p>
                 </div>
             </div>
             <div class="move-btns">
@@ -121,4 +128,5 @@
 
     <script src="/scripts/show.js"></script>
 </body>
+
 </html>

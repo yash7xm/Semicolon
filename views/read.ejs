@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +10,12 @@
     <script src="https://kit.fontawesome.com/792c2e8fcc.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   
-    
+
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-    
+
 </head>
+
 <body>
     <div class="mouseCaret"></div>
 
@@ -24,39 +26,40 @@
             </div>
         </div>
         <div class="nav-mobile-section">
-        <div class="features">
-            <div class="read-link">
-                <a href="http://localhost:8080/read" class="grow-link">READ</a>
+            <div class="features">
+                <div class="read-link">
+                    <a href="http://localhost:8080/read" class="grow-link">READ</a>
+                </div>
+                <div class="test-link">
+                    <a href="http://localhost:8080/test" class="grow-link">TEST</a>
+                </div>
             </div>
-            <div class="test-link">
-                <a href="http://localhost:8080/test" class="grow-link">TEST</a>
+            <div class="about">
+                <div class="home-link-icon">
+                    <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
+                </div>
+                <div class="about-link-icon">
+                    <a href="#" class="border-link" onclick="return false;"><i class="fa-solid fa-circle-info"></i></a>
+                </div>
+                <div class="github-link-icon">
+                    <a href="https://github.com/semicolon-2023/Semicolon" class="border-link"><i
+                            class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-text">
+                    <% if (typeof sessionId !=='undefined' ) { %>
+                        <% if (!sessionId) { %>
+                            <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                            <% } else { %>
+                                <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
+                                <% } %>
+                                    <% } else { %>
+                                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
+                                        <% } %>
+                </div>
             </div>
         </div>
-        <div class="about">
-            <div class="home-link-icon">
-               <a href="http://localhost:8080/" class="border-link"><i class="fa-solid fa-house"></i></a>
-            </div>
-            <div class="about-link-icon">
-                <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
-            </div>
-            <div class="github-link-icon">
-                <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </div>
-        <div class="profile">
-            <div class="profile-text">
-                <% if (typeof sessionId !=='undefined' ) { %>
-                    <% if (!sessionId) { %>
-                        <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
-                        <% } else { %>
-                            <a href="http://localhost:8080/profile" class="grow-link">PROFILE</a>
-                            <% } %>
-                                <% } else { %>
-                                    <a href="http://localhost:8080/signIn" class="grow-link">REGISTER</a>
-                                    <% } %>
-            </div>
-        </div>
-    </div>
         <button id="nav-toggle-btn" type="button" onclick="handleNavToggle()">
             <span>Menu</span>
             <i class="fa-solid fa-bars"></i>
@@ -68,15 +71,20 @@
         <div class="subjects">
             <div class="sub">SUBJECT</div>
             <div class="dropdown">
-                <button class="sub-dropdown-toggle" onclick="subToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <button class="sub-dropdown-toggle" onclick="subToggleDropdown()"><i
+                        class="fa-solid fa-angle-down"></i></button>
                 <ul class="sub-dropdown-menu subject-select-mobile" id="subDropdownMenu">
-                    <li value="0"><%= data[0].sem[0].subjects[0].subjectName %>
+                    <li value="0">
+                        <%= data[0].sem[0].subjects[0].subjectName %>
                     </li>
-                    <li value="1"><%= data[0].sem[0].subjects[1].subjectName %>
+                    <li value="1">
+                        <%= data[0].sem[0].subjects[1].subjectName %>
                     </li>
-                    <li value="2"><%= data[0].sem[0].subjects[2].subjectName %>
+                    <li value="2">
+                        <%= data[0].sem[0].subjects[2].subjectName %>
                     </li>
-                    <li value="3"><%= data[0].sem[0].subjects[3].subjectName %>
+                    <li value="3">
+                        <%= data[0].sem[0].subjects[3].subjectName %>
                     </li>
                 </ul>
             </div>
@@ -84,7 +92,8 @@
         <div class="semester">
             <div class="sem">SEM <span class="sem-no">4</span></div>
             <div class="dropdown">
-               <button class="sem-dropdown-toggle" onclick="semToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <button class="sem-dropdown-toggle" onclick="semToggleDropdown()"><i
+                        class="fa-solid fa-angle-down"></i></button>
                 <ul class="sem-dropdown-menu sem-select" id="semDropdownMenu">
                     <li value="0">1</li>
                     <li value="1">2</li>
@@ -100,7 +109,8 @@
         <div class="units">
             <div class="unit">UNIT <span class="unit-no">1</span></div>
             <div class="dropdown">
-                <button class="unit-dropdown-toggle" onclick="unitToggleDropdown()"><i class="fa-solid fa-angle-down"></i></button>
+                <button class="unit-dropdown-toggle" onclick="unitToggleDropdown()"><i
+                        class="fa-solid fa-angle-down"></i></button>
                 <ul class="unit-dropdown-menu unit-select" id="unitDropdownMenu">
                     <li value="0">1</li>
                     <li value="1">2</li>
@@ -114,26 +124,45 @@
 
     <div class="info">
         <div class="subjects-display subject-select">
-            <div style="color: yellow;"><p value="0"><%= data[0].sem[0].subjects[0].subjectName %></p></div>
-            <div><p value="1"><%= data[0].sem[0].subjects[1].subjectName %></p></div>
-            <div><p value="2"><%= data[0].sem[0].subjects[2].subjectName %></p></div>
-            <div><p value="3"><%= data[0].sem[0].subjects[3].subjectName %></p></div>
+            <div style="color: yellow;">
+                <p value="0">
+                    <%= data[0].sem[0].subjects[0].subjectName %>
+                </p>
+            </div>
+            <div>
+                <p value="1">
+                    <%= data[0].sem[0].subjects[1].subjectName %>
+                </p>
+            </div>
+            <div>
+                <p value="2">
+                    <%= data[0].sem[0].subjects[2].subjectName %>
+                </p>
+            </div>
+            <div>
+                <p value="3">
+                    <%= data[0].sem[0].subjects[3].subjectName %>
+                </p>
+            </div>
         </div>
         <div class="topics">
-            <% let topicIndex = 0; %>
-            <% for(let topic of data[0].sem[0].subjects[0].units[0].topics) { %>
-                <div class="card" value =<%= topicIndex %>>
-                <div class="card-image">
-                </div>
-                <div class="card-text">
-                    <h6><%= topic.name %></h6>
+            <% let topicIndex=0; %>
+                <% for(let topic of data[0].sem[0].subjects[0].units[0].topics) { %>
+                    <div class="card" value=<%=topicIndex %>>
+                        <div class="card-image">
+                        </div>
+                        <div class="card-text">
+                            <h6>
+                                <%= topic.name %>
+                            </h6>
+                        </div>
                     </div>
-                </div>
-                <% topicIndex++; %>
-                <% } %>
+                    <% topicIndex++; %>
+                        <% } %>
         </div>
     </div>
 
     <script src="/scripts/read.js"></script>
 </body>
+
 </html>

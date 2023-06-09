@@ -8,9 +8,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
-const session = require('express-session');
 const cookieParser = require('cookie-parser');
 let data = '';
+let rdata = '';
 let radata = '';
 let userData = '';
 let sessionId = '';
@@ -29,11 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({
-  secret: '12121212',
-  resave: false,
-  saveUninitialized: false
-}));
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
@@ -116,7 +111,7 @@ const userSchema = new mongoose.Schema({
   },
   message: {
     type: String,
-    maxlength: 80,
+    maxlength: 100,
     default: ''
   }
 });
@@ -125,20 +120,20 @@ const User = mongoose.model('User', userSchema);
 
 const Random = new mongoose.Schema({
   data: [
-      {
-          content: String
-      },
+    {
+      content: String
+    },
   ]
 })
 
 const RandomData = mongoose.model('RandomData', Random);
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   sessionId = req.cookies.userId;
   next();
 })
 
-app.post('/everything', async (req,res) => {
+app.post('/everything', async (req, res) => {
   try {
     if (data == '') {
       await fetchData();
@@ -146,22 +141,13 @@ app.post('/everything', async (req,res) => {
   } catch (error) {
     console.log(error);
   }
-  res.sendStatus(200);  
+  res.sendStatus(200);
 })
- 
+
 async function fetchData() {
   data = await Sem1Notes.find({});
-  radata = await RandomData.find({});  
+  radata = await RandomData.find({});
 }
-
-app.get('/', (req, res) => {
-  res.render('index', { sessionId });
-});
-
-
-app.get('/dog', async (req, res) => {
-  res.json(data);
-})
 
 app.get('/read', async (req, res) => {
   try {
@@ -223,7 +209,10 @@ app.get('/signIn', (req, res) => {
 })
 
 app.post('/register', async (req, res) => {
-  const { name, username, password } = req.body;
+  let { name, username, password } = req.body;
+  name = name.replace(/\s+/g, " ").trim();
+  username = username.replace(/\s+/g, " ").trim();
+  password = password.replace(/\s+/g, " ").trim();
   let flag = false;
   const hash = await bcrypt.hash(password, 12);
   const user = new User({
@@ -254,7 +243,6 @@ app.post('/signIn', async (req, res, next) => {
     if (validPassword) {
       res.cookie('userId', user._id, { maxAge: 30 * 24 * 60 * 60 * 1000 });
       sessionId = res.cookie.userId;
-      // console.log(res.cookie.userId);
       flag2 = true;
       res.redirect('/');
     }
@@ -275,8 +263,12 @@ app.post('/updateScore', async (req, res) => {
   }
   const user = await User.findOne({ _id: sessionId });
 
-  const S = req.body.score;
+  let S = req.body.score;
   const A = req.body.accuracy;
+
+  if(S == Infinity || S == null) {
+    S = 0;
+  }
 
   user.score.push({
     wpm: S,
@@ -302,7 +294,6 @@ app.post('/updateScore', async (req, res) => {
     rank++;
   }
 
-  // console.log(user);
   res.sendStatus(200);
 })
 
@@ -330,16 +321,23 @@ app.post('/updateName', async (req, res) => {
   }
 });
 
-app.get('/userfind', async (req, res) => {
-  const user = await User.find({});
-  // await User.deleteMany({});
-  res.send(user);
-})
+app.post('/updatePhoto', async (req, res) => {
+  try {
+    const photoNo = req.body.PhotoNumber;
+    userData.photoNumber = photoNo;
+    await userData.save();
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating name');
+  }
+});
 
 app.get('/profile', async (req, res) => {
   try {
     userData = await User.findOne({ _id: sessionId });
-    res.render('profile', { userData })
+    const totalUsers = await User.countDocuments();
+    res.render('profile', { userData, totalUsers });
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
@@ -361,6 +359,12 @@ app.get('/leadborad', async (req, res) => {
   res.json(users);
 })
 
+app.get("/", async (req, res) => {
+  res.render('index', { sessionId });
+  if (data == '')
+    await fetchData();
+})
+
 app.listen('8080', () => {
-  console.log('listneing');
+  console.log('listening');
 })

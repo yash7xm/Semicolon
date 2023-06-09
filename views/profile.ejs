@@ -20,12 +20,23 @@
 </head>
 
 <body>
+    <div class="mouseCaret"></div>
 
-  
+    <div class="popup">
+        <div class="popup-wraper">
+            <div class="photo-select">
+                <img src="/images/boy.png" alt="" data-value="1">
+                <img src="/images/boy-2.png" alt="" data-value="2">
+                <img src="/images/girl.png" alt="" data-value="3">
+                <img src="/images/girl2.png" alt="" data-value="4">
+            </div>
+        </div>
+    </div>
+
     <nav data-toggled="false" data-transitionable="false">
         <div class="logo">
             <div class="logo-name">
-                <a href="http://localhost:8080/" class="grow-link">Semicolon</a>
+                <a href="/" class="grow-link">Semicolon</a>
             </div>
         </div>
         <div class="nav-mobile-section">
@@ -39,19 +50,18 @@
             </div>
             <div class="about">
                 <div class="home-link-icon">
-                    <a href="http://localhost:8080/" class="border-link"><i class="fa-solid fa-house"></i></a>
+                    <a href="/" class="border-link"><i class="fa-solid fa-house"></i></a>
                 </div>
                 <div class="about-link-icon">
-                    <a href="" class="border-link"><i class="fa-solid fa-circle-info"></i></a>
+                    <a href="#" class="border-link" onclick="return false;"><i class="fa-solid fa-circle-info"></i></a>
                 </div>
                 <div class="github-link-icon">
-                    <a href="" class="border-link"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/semicolon-2023/Semicolon" class="border-link"><i class="fa-brands fa-github"></i></a>
                 </div>
             </div>
             <div class="profile">
                 <div class="profile-text">
-                        
-    <a href="http://localhost:8080/logout" class="grow-link">LOGOUT</a>
+                    <a href="http://localhost:8080/logout" class="grow-link">LOGOUT</a>
                 </div>
             </div>
         </div>
@@ -61,12 +71,20 @@
         </button>
     </nav>
 
-
     <div class="content">
         <div class="user">
             <div class="upper">
                 <div class="photo">
-                    <img src="/images/icon.png" alt="profile-icon"><i class="fa-solid fa-pen-to-square"></i>
+                    <% if (userData.photoNumber===1) { %>
+                        <img src="/images/boy.png" alt="profile-icon">
+                        <% } else if (userData.photoNumber===2) { %>
+                            <img src="/images/boy-2.png" alt="profile-icon">
+                            <% } else if (userData.photoNumber===3) { %>
+                                <img src="/images/girl.png" alt="profile-icon">
+                                <% } else { %>
+                                    <img src="/images/girl2.png" alt="profile-icon">
+                                    <% } %>
+                                        <i class="fa-solid fa-pen-to-square"></i>
                 </div>
                 <div class="user-info">
                     <div class="name">
@@ -82,7 +100,7 @@
             </div>
             <div class="bottom">
                 <div class="rank">
-                    Rank: <span>#<%= userData.rank %></span>
+                    Rank: <span>#<%= userData.rank %> / <%= totalUsers %></span>
                 </div>
                 <div class="best-score">
                     Best Score: <span>
@@ -106,7 +124,7 @@
             <div class="text-area">
                 <p>
                     <% if (!userData.message) { %>
-                        Max 80 chars long
+                        Max 100 chars long
                         <% } else { %>
                             <%= userData.message %>
                                 <% } %>
@@ -121,7 +139,7 @@
             </div>
         </div>
         <div class="graph">
-                <div id="chart_div"></div>
+            <div id="chart_div"></div>
         </div>
         <div class="map">
             <div class="heatmap">
