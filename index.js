@@ -11,7 +11,6 @@ const moment = require('moment');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 let data = '';
-let rdata = '';
 let radata = '';
 let userData = '';
 let sessionId = '';
