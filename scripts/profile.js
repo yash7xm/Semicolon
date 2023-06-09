@@ -217,8 +217,15 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchUserData();
 });
 
+let initialHeight = window.innerHeight;
+
 window.addEventListener('resize', () => {
-    window.location.reload();
+    let currentHeight = window.innerHeight;
+    if(currentHeight != initialHeight){
+        window.location.reload();   
+    }else{
+        initialHeight = window.innerHeight;
+    }
     handleChartResize();
     fetchUserData();
 })
