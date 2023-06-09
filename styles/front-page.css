@@ -568,90 +568,6 @@ article[data-index="1"] .image{
     }
     
    
-    .top-list {
-        padding: 1rem;
-        padding-top: 0rem;
-    }
-    
-    .label {
-        width: 90%;
-        display: flex;
-        margin: 1rem auto;
-        padding: 0rem;
-        margin-bottom: 0rem;
-        font-size: 0.8rem;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 1000rem;
-        display: flex;
-    }
-    
-    .label div {
-        font-weight: 500;
-        color: black;
-        font-family: 'Space Grotesk', sans-serif;
-        display: flex;
-        align-items: center;
-    }
-    
-    .rank {
-        width: 10%;
-    }
-    
-    .username {
-        width: 50%;
-    }
-    
-    .speed {
-        text-align: left;
-        width: 20%;
-    }
-    
-    
-    
-    
-    .rest-list {
-        width: 95%;
-        height: 15%;
-        display: flex;
-        margin: 2rem auto;
-        /* background-color: rgba(0, 0, 0, 0.8); */
-        background-color: rgba(255, 255, 255, 0.5);
-        color: black;
-        font-size: 1.2rem;
-        font-weight: 900;
-        border-radius: 10px;
-        font-family: 'Space Grotesk', sans-serif;
-        overflow: hidden;
-        box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-    }
-    
-    .rest-list > div {
-        display: flex;
-        align-items: center;
-        padding:  0rem 2rem;
-    }
-    
-    .rank-no {
-        width: 10%;
-        height: 100%;
-        color: black;
-        justify-content: center;
-        opacity: 1;
-        /* border-top-left-radius: 1000rem;
-        border-bottom-left-radius: 1000rem; */
-        /* background-color: rgba(0, 0, 0, 0.9); */
-    }
-    
-    .rank-name {
-        width: 70%;
-        opacity: 1;
-        /* border: 1px solid #1e2345; */
-    }
-    
-    .rank-spped {
-        opacity: 1;
-        width: 20%;
-    }
 }
 
 @media(max-width: 800px) {
@@ -785,6 +701,45 @@ article[data-index="1"] .image{
 
     .description {
         padding: 2rem;
+    }
+
+    
+    .top-list {
+        padding: 1rem;
+        padding-top: 0rem;
+    }
+    
+    .label {
+        width: 90%;
+        display: flex;
+        margin: 1rem auto;
+        padding: 0rem;
+        margin-bottom: 0rem;
+        font-size: 0.8rem;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 1000rem;
+        display: flex;
+    }
+    
+    .label div {
+        font-weight: 500;
+        color: black;
+        font-family: 'Space Grotesk', sans-serif;
+        display: flex;
+        align-items: center;
+    }
+    
+    .rank {
+        width: 10%;
+    }
+    
+    .username {
+        width: 60%;
+    }
+    
+    .speed {
+        text-align: left;
+        width: 20%;
     }
 }
 
