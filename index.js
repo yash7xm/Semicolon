@@ -160,6 +160,9 @@ app.get('/read', async (req, res) => {
   res.render('read', { data, sessionId });
 })
 
+app.get('/dog', (req,res) => {
+  res.json(data);
+})
 
 
 app.get('/test', async (req, res) => {
