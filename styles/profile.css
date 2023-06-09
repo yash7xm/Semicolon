@@ -817,6 +817,12 @@ a:hover {
         gap: 5rem;
     }
 
+    .photo-select img {
+        width: 5rem;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
     .photo {
         width: 1rem;
     }
