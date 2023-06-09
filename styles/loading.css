@@ -1,0 +1,204 @@
+body {
+    background-color: #050a18;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.finger {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1.8rem;
+    height: 4.5rem;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 0 2px;
+}
+
+.line-1 {
+    background-color: rgb(125, 125, 212);
+    width: 1rem;
+    height: 3px;
+    border-radius: 4px;
+    margin-top: 30%;
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.line-2 {
+    background-color: rgb(125, 125, 212);
+    width: 1rem;
+    height: 3px;
+    border-radius: 4px;
+    margin-top: 10%;
+}
+
+.nail {
+    background-color: rgb(125, 125, 212);
+    width: 1.4rem;
+    height: 1.2rem;
+    margin-top: auto;
+    margin-bottom: 20%;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.finger-1 {
+    animation: finger-1-moving 600ms ease forwards;
+}
+
+.finger-2 {
+    height: 5.3rem;
+    animation: finger-1-moving 600ms ease 100ms forwards;
+}
+
+.finger-3 {
+    height: 6rem;
+    animation: finger-1-moving 600ms ease 200ms forwards;
+}
+
+.finger-4 {
+    height: 5.2rem;
+    animation: finger-1-moving 600ms ease 300ms forwards;
+}
+
+.thumb {
+    position: relative;
+    background-color: white;
+    height: 2.4rem;
+    width: 2.4rem;
+    margin: 0 2px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 40px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 20px;
+    animation: thumb-moving 400ms ease 350ms forwards;
+}
+
+.thumb::before {
+    content: '';
+    position: absolute;
+    width: 2.4rem;
+    height: 2rem;
+    background-color: #050a18;
+    border-bottom-left-radius: 50%;
+    transform: translate(0, -70%);
+}
+
+@keyframes finger-1-moving {
+    0% {
+        transform: translateY(0) scaleY(1);
+    }
+
+    50% {
+        transform: translateY(-20%) scaleY(0.8);
+    }
+
+    100% {
+        transform: translateY(0) scaleY((1));
+    }
+}
+
+.finger-1 .line-1 {
+    animation: line-moving 500ms ease 100ms forwards;
+}
+
+.finger-1 .line-2 {
+    animation: line-moving 500ms ease 100ms forwards;
+}
+
+.finger-1 .nail {
+    animation: nail-moving 500ms ease 100ms forwards;
+}
+
+.finger-2 .line-1 {
+    animation: line-moving 500ms ease 200ms forwards;
+}
+
+.finger-2 .line-2 {
+    animation: line-moving 500ms ease 200ms forwards;
+}
+
+.finger-2 .nail {
+    animation: nail-moving 500ms ease 200ms forwards;
+}
+
+.finger-3 .line-1 {
+    animation: line-moving 500ms ease 300ms forwards;
+}
+
+.finger-3 .line-2 {
+    animation: line-moving 500ms ease 300ms forwards;
+}
+
+.finger-3 .nail {
+    animation: nail-moving 500ms ease 300ms forwards;
+}
+
+.finger-4 .line-1 {
+    animation: line-moving 500ms ease 400ms forwards;
+}
+
+.finger-4 .line-2 {
+    animation: line-moving 500ms ease 400ms forwards;
+}
+
+.finger-4 .nail {
+    animation: nail-moving 500ms ease 400ms forwards;
+}
+
+@keyframes line-moving {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
+}
+
+@keyframes nail-moving {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-40%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes thumb-moving {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

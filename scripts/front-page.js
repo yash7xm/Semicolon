@@ -4,6 +4,7 @@ const navLinks = document.querySelectorAll('nav .grow-link');
 const rightBtn = document.querySelectorAll('.move-btns .right-btn');
 const leftBtn = document.querySelectorAll('.move-btns .left-btn');
 const borderLinks = document.querySelectorAll('.border-link');
+const loading = document.querySelector('.loading-wrapper');
 const nav = document.querySelector('nav');
 
 let scrollDownStop = false;
@@ -191,6 +192,17 @@ function getAppliedTheme() {
     var appliedTheme = themes.find(theme => document.documentElement.classList.contains(theme));
     return appliedTheme;
 }
+
+fetchEverything();
+async function fetchEverything(){
+    await fetch('http://localhost:8080/everything', {
+        method: "POST",
+
+    })
+    loading.style.display = 'none';
+    
+}
+
 
 fetchUsers();
 async function fetchUsers(){

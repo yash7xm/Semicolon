@@ -134,22 +134,44 @@ const Random = new mongoose.Schema({
 
 const RandomData = mongoose.model('RandomData', Random);
 
-app.use(async (req, res, next) => {
+app.use((req,res,next) => {
   sessionId = req.cookies.userId;
-  if (data == '') await fetchData();
   next();
 })
 
+app.post('/everything', async (req,res) => {
+  try {
+    if (data == '') {
+      await fetchData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  res.sendStatus(200);  
+})
+ 
 async function fetchData() {
   data = await Sem1Notes.find({});
-  radata = await RandomData.find({});
+  radata = await RandomData.find({});  
 }
+
+app.get('/', (req, res) => {
+  res.render('index', { sessionId });
+});
+
 
 app.get('/dog', async (req, res) => {
   res.json(data);
 })
 
 app.get('/read', async (req, res) => {
+  try {
+    if (data == '') {
+      await fetchData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
   res.render('read', { data, sessionId });
 })
 
@@ -168,7 +190,14 @@ app.get('/topicTest', (req, res) => {
   res.render('typing', { content, sessionId });
 })
 
-app.get('/show', (req, res) => {
+app.get('/show', async (req, res) => {
+  try {
+    if (data == '') {
+      await fetchData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
   res.render('show', { topicIndex, subjectIndex, unitIndex, data, sessionId });
 })
 
@@ -324,10 +353,6 @@ app.get('/graphData', async (req, res) => {
 app.get('/leadborad', async (req, res) => {
   const users = await User.find({}).sort({ bestScore: -1 });
   res.json(users);
-})
-
-app.get("/", async (req, res) => {
-  res.render('index', { sessionId });
 })
 
 app.listen('8080', () => {
