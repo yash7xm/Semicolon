@@ -1,5 +1,5 @@
 const singInBtn = document.getElementById('singInBtn');
-const singUpBtn =  document.getElementById('singUpBtn');
+const singUpBtn = document.getElementById('singUpBtn');
 const info = document.querySelector('.info');
 const container = document.querySelector('.container');
 const heading = document.querySelector('.heading');
@@ -8,7 +8,62 @@ const regInfo = document.querySelector('.reg-info');
 const singIn = document.querySelector('.signIn');
 const reg = document.querySelector('.reg');
 const mobileSignIn = document.querySelector('.mobile-signIn-btn button');
+const mouseCaret = document.querySelector('.mouseCaret');
+const logo = document.querySelector('.logo');
+const h1 = document.querySelectorAll('h1');
+const acc = document.querySelectorAll('.acc');
+const label = document.querySelectorAll('label');
+const input = document.querySelectorAll('input');
+
 let clickCounter = 0;
+
+window.addEventListener('mousemove', (e) => {
+    mouseCaret.style.top = e.pageY + 'px';
+    mouseCaret.style.left = e.pageX + 'px';
+})
+
+logo.addEventListener('mouseover', () => {
+    mouseCaret.classList.add('caret-grow');
+})
+logo.addEventListener('mouseleave', () => {
+    mouseCaret.classList.remove('caret-grow');
+})
+
+h1.forEach(link => {
+    link.addEventListener('mouseover', () => {
+        mouseCaret.classList.add('caret-grow');
+    })
+    link.addEventListener('mouseleave', () => {
+        mouseCaret.classList.remove('caret-grow');
+    })
+})
+
+acc.forEach(link => {
+    link.addEventListener('mouseover', () => {
+        mouseCaret.classList.add('caret-grow');
+    })
+    link.addEventListener('mouseleave', () => {
+        mouseCaret.classList.remove('caret-grow');
+    })
+})
+
+label.forEach(link => {
+    link.addEventListener('mouseover', () => {
+        mouseCaret.classList.remove('mouseCaret');
+    })
+    link.addEventListener('mouseleave', () => {
+        mouseCaret.classList.add('mouseCaret');
+    })
+})
+
+input.forEach(link => {
+    link.addEventListener('mouseover', () => {
+        mouseCaret.classList.remove('mouseCaret');
+    })
+    link.addEventListener('mouseleave', () => {
+        mouseCaret.classList.add('mouseCaret');
+    })
+})
 
 singInBtn.addEventListener('click', () => {
     info.style.transform = 'translateX(150%)';
@@ -58,7 +113,6 @@ singUpBtn.addEventListener('click', () => {
 mobileSignIn.addEventListener('click', () => {
     reg.style.left = '-100%';
     singIn.style.left = '0%';
-    // singIn.style.display = 'flex';
 })
 
 const signInForm = document.querySelector('.signIn form');
@@ -69,27 +123,27 @@ signInForm.addEventListener("submit", async (e) => {
     const username = document.querySelector(".userName");
     const password = document.querySelector('.password');
 
-    if(name.value.length == 0){
+    if (name.value.length == 0) {
         name.value = '';
         name.setAttribute('placeholder', 'Name is required');
     }
-    else if(name.value.length > 20 ){
+    else if (name.value.length > 20) {
         name.value = '';
         name.setAttribute('placeholder', 'must be < 20 chars');
     }
-    else if(username.value.length == 0){
+    else if (username.value.length == 0) {
         username.value = '';
         username.setAttribute('placeholder', 'Username is required');
     }
-    else if(username.value.length > 20){
+    else if (username.value.length > 20) {
         username.value = '';
         username.setAttribute('placeholder', 'must be < 20 chars');
     }
-    else if(password.value.length < 8 || password.value.length > 20){
+    else if (password.value.length < 8 || password.value.length > 20) {
         password.value = '';
         password.setAttribute("placeholder", 'must be 8-20 chars');
     }
-    else{
+    else {
         signInForm.submit();
     }
 })
@@ -97,24 +151,23 @@ signInForm.addEventListener("submit", async (e) => {
 const regForm = document.querySelector(".reg form");
 
 regForm.addEventListener("submit", async (e) => {
-    console.log('in ')
     e.preventDefault();
     const username = document.querySelector(".reg form .userName");
     const password = document.querySelector('.reg form .password');
 
-    if(username.value.length == 0){
+    if (username.value.length == 0) {
         username.value = '';
         username.setAttribute('placeholder', 'Username is required');
     }
-    else if(username.value.length > 20){
+    else if (username.value.length > 20) {
         username.value = '';
         username.setAttribute('placeholder', 'must be < 20 chars');
     }
-    else if(password.value.length < 8 || password.value.length > 20){
+    else if (password.value.length < 8 || password.value.length > 20) {
         password.value = '';
         password.setAttribute("placeholder", 'must be 8-20 chars');
     }
-    else{
+    else {
         regForm.submit();
     }
 })

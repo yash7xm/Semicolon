@@ -566,6 +566,10 @@ article[data-index="1"] .image{
     .rotating-icon {
         font-size: 3rem;
     }
+
+    .description>div>p {
+        font-size: 0.75rem;
+    }
     
    
 }
@@ -645,7 +649,7 @@ article[data-index="1"] .image{
     }
 
     main>article {
-        grid-template-rows: 1.5fr repeat(3, 0.5fr);
+        grid-template-rows: 30vh repeat(3,20vh);
         height: max(600px, 100%);
     }
 

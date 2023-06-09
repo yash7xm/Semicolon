@@ -4,14 +4,26 @@ const navLinks = document.querySelectorAll('nav .grow-link');
 const rightBtn = document.querySelectorAll('.move-btns .right-btn');
 const leftBtn = document.querySelectorAll('.move-btns .left-btn');
 const borderLinks = document.querySelectorAll('.border-link');
-const loading = document.querySelector('.loading-wrapper');
 const nav = document.querySelector('nav');
+const loading = document.querySelector('.loading-wrapper');
 
 let scrollDownStop = false;
 let scrollTopStop = false;
 let activeIndex = 0;
 let users;
 
+document.addEventListener('DOMContentLoaded', function () {
+    var defaultTheme = 'theme1';
+    document.documentElement.classList.add(defaultTheme);
+});
+
+window.addEventListener('load', function () {
+    document.body.classList.add('no-transition');
+
+    setTimeout(() => {
+        document.body.classList.remove('no-transition');
+    }, 1000);
+});
 
 window.addEventListener('mousemove', (e) => {
     mouseCaret.style.top = e.pageY + 'px';
@@ -20,11 +32,11 @@ window.addEventListener('mousemove', (e) => {
 
 borderLinks.forEach(link => {
     link.addEventListener('mouseover', () => {
-        link.style.color = 'white';
+        link.style.color = 'var(--hover-color)';
         mouseCaret.classList.remove('mouseCaret');
     })
     link.addEventListener('mouseleave', () => {
-        link.style.color = 'rgba(116,112,131)';
+        link.style.color = 'var(--main-text-color)';
         mouseCaret.classList.add('mouseCaret');
     })
 })
@@ -49,7 +61,6 @@ leftBtn.forEach(btn => {
 
 navLinks.forEach(link => {
     link.addEventListener('mouseover', () => {
-        console.log('inside nav link');
         mouseCaret.classList.add('caret-grow');
         link.classList.add('hovered-link');
     })
@@ -60,8 +71,6 @@ navLinks.forEach(link => {
 })
 
 function handleMouseEnter() {
-    console.log("Mouse entered!");
-    console.log(activeIndex);
     const headingText = document.querySelector(`[data-index="${activeIndex}"] .heading .heading-text`);
     const rotatingIcon = document.querySelector(`[data-index="${activeIndex}"] .heading .rotating-icon img`);
     const headingFrontText = document.querySelector(`[data-index="${activeIndex}"] .heading-front-text`);
@@ -88,7 +97,6 @@ function handleMouseExit() {
     rotatingIcon.style.transform = "rotate(0deg)";
     rotatingIcon.style.transition = "transform 0.3s ease-out";
 }
-
 
 function handleRightBtn() {
     const nextIndex = activeIndex + 1 <= slides.length - 1 ? activeIndex + 1 : 0;
@@ -133,11 +141,6 @@ window.matchMedia("(max-width: 800px)").onchange = e => {
     nav.dataset.toggled = "false";
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    var defaultTheme = 'theme1';
-    document.documentElement.classList.add(defaultTheme);
-});
-
 document.addEventListener('click', (event) => {
     const clickedElement = event.target;
     if (clickedElement.tagName.toLowerCase() !== 'button' &&
@@ -151,7 +154,8 @@ document.addEventListener('click', (event) => {
         !clickedElement.classList.contains('image') &&
         clickedElement.tagName.toLowerCase() !== 'img' &&
         !clickedElement.classList.contains('left-btn') &&
-        !clickedElement.classList.contains('right-btn')) {
+        !clickedElement.classList.contains('right-btn') &&
+        !clickedElement.closest('.image')) {
 
         if (!mouseCaret.classList.contains('clicked'))
             applyNextColorTheme();
@@ -168,7 +172,8 @@ document.addEventListener('click', (event) => {
         !clickedElement.classList.contains('image') &&
         clickedElement.tagName.toLowerCase() !== 'img' &&
         !clickedElement.classList.contains('left-btn') &&
-        !clickedElement.classList.contains('right-btn')) {
+        !clickedElement.classList.contains('right-btn') &&
+        !clickedElement.closest('.image')) {
 
         mouseCaret.classList.add('clicked');
         setTimeout(function () {
@@ -194,54 +199,51 @@ function getAppliedTheme() {
 }
 
 fetchEverything();
-async function fetchEverything(){
+async function fetchEverything() {
     await fetch('http://localhost:8080/everything', {
         method: "POST",
 
     })
     loading.style.display = 'none';
-    
 }
-
 
 fetchUsers();
-async function fetchUsers(){
-  fetch('http://localhost:8080/leadborad')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-    users = data;
-    showLeaderBoard();
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+async function fetchUsers() {
+    fetch('http://localhost:8080/leadborad')
+        .then(response => response.json())
+        .then(data => {
+            users = data;
+            showLeaderBoard();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
-function showLeaderBoard(){
+function showLeaderBoard() {
     const list = document.querySelector('.top-list');
 
-    for(let i = 0; i < users.length && i < 10; i++){
+    for (let i = 0; i < users.length && i < 10; i++) {
 
-    const restList = document.createElement('div');
-    restList.classList.add('rest-list');
+        const restList = document.createElement('div');
+        restList.classList.add('rest-list');
 
-    const rankNo = document.createElement('div');
-    rankNo.classList.add('rank-no');
-    rankNo.textContent = `${i+1}`;
+        const rankNo = document.createElement('div');
+        rankNo.classList.add('rank-no');
+        rankNo.textContent = `${i + 1}`;
 
-    const rankName = document.createElement('div');
-    rankName.classList.add('rank-name');
-    rankName.textContent = `${users[i].username}`;
+        const rankName = document.createElement('div');
+        rankName.classList.add('rank-name');
+        rankName.textContent = `${users[i].username}`;
 
-    const rankSpeed = document.createElement('div');
-    rankSpeed.classList.add('rank-speed');
-    rankSpeed.textContent  = `${users[i].bestScore}`;
+        const rankSpeed = document.createElement('div');
+        rankSpeed.classList.add('rank-speed');
+        rankSpeed.textContent = `${users[i].bestScore}`;
 
-    restList.appendChild(rankNo);
-    restList.appendChild(rankName);
-    restList.appendChild(rankSpeed);
+        restList.appendChild(rankNo);
+        restList.appendChild(rankName);
+        restList.appendChild(rankSpeed);
 
-    list.appendChild(restList);
+        list.appendChild(restList);
     }
 }

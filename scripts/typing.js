@@ -59,30 +59,40 @@ const capsMsg = document.querySelector('.caps-lock>p>span')
 
 const width = window.innerWidth || document.documentElement.clientWidth;
 const height = typingArea.getBoundingClientRect().height;
-// console.log(height);
 maxLines = Math.floor((height - 35) / 36) - 3;
-// console.log(maxLines);
 
 document.addEventListener('DOMContentLoaded', function () {
     var defaultTheme = 'theme1';
     document.documentElement.classList.add(defaultTheme);
+
+    const defaultTimer = document.querySelector('[value="30"]');
+
+    time.style.color = "#ffd700";
+    clockActive = true;
+    clockHover = false;
+    defaultTimer.style.color = "#ffd700";
+    clock = defaultTimer.getAttribute("value");
+    liActiveValue = defaultTimer.getAttribute("value");
+    stopWatch.innerText = clock;
 });
 
+window.addEventListener('load', function () {
+    document.body.classList.add('no-transition');
+
+    setTimeout(() => {
+        document.body.classList.remove('no-transition');
+    }, 1000);
+});
 
 input.style.height = '0';
 input.style.width = '0';
 input.style.border = '0';
 input.style.padding = '0';
 
-
-
 window.addEventListener('resize', () => {
-
     location.reload();
-   
 })
 
-// console.log(width);
 input.addEventListener("keyup", function (event) {
     if (event.getModifierState("CapsLock")) {
         capsLockIndicator.style.visibility = 'visible';
@@ -93,38 +103,42 @@ input.addEventListener("keyup", function (event) {
     }
 });
 
-// document.addEventListener('click', (event) => {
-//     const clickedElement = event.target;
-//     if (clickedElement.tagName.toLowerCase() !== 'button' &&
-//         clickedElement.tagName.toLowerCase() !== 'a' &&
-//         clickedElement.tagName.toLowerCase() !== 'li' &&
-//         clickedElement.tagName.toLowerCase() !== 'p' &&
-//         clickedElement.tagName.toLowerCase() !== 'input' &&
-//         clickedElement.tagName.toLowerCase() !== 'i' &&
-//         clickedElement.tagName.toLowerCase() !== 'span' &&
-//         !clickedElement.classList.contains('typing-area') &&
-//         !clickedElement.classList.contains('focus-popup-wrapper')) {
+document.addEventListener('click', (event) => {
+    const clickedElement = event.target;
+    if (clickedElement.tagName.toLowerCase() !== 'button' &&
+        clickedElement.tagName.toLowerCase() !== 'a' &&
+        clickedElement.tagName.toLowerCase() !== 'li' &&
+        clickedElement.tagName.toLowerCase() !== 'p' &&
+        clickedElement.tagName.toLowerCase() !== 'input' &&
+        clickedElement.tagName.toLowerCase() !== 'i' &&
+        clickedElement.tagName.toLowerCase() !== 'span' &&
+        !clickedElement.classList.contains('typing-area') &&
+        !clickedElement.classList.contains('focus-popup-wrapper') &&
+        !clickedElement.classList.contains('heading') &&
+        !clickedElement.closest('.popups')) {
 
-//         if (!mouseCaret.classList.contains('clicked'))
-//             applyNextColorTheme();
-//     }
+        if (!mouseCaret.classList.contains('clicked'))
+            applyNextColorTheme();
+    }
 
-//     if (clickedElement.tagName.toLowerCase() !== 'button' &&
-//         clickedElement.tagName.toLowerCase() !== 'a' &&
-//         clickedElement.tagName.toLowerCase() !== 'li' &&
-//         clickedElement.tagName.toLowerCase() !== 'p' &&
-//         clickedElement.tagName.toLowerCase() !== 'input' &&
-//         clickedElement.tagName.toLowerCase() !== 'i' &&
-//         clickedElement.tagName.toLowerCase() !== 'span' &&
-//         !clickedElement.classList.contains('typing-area') &&
-//         !clickedElement.classList.contains('focus-popup-wrapper')) {
+    if (clickedElement.tagName.toLowerCase() !== 'button' &&
+        clickedElement.tagName.toLowerCase() !== 'a' &&
+        clickedElement.tagName.toLowerCase() !== 'li' &&
+        clickedElement.tagName.toLowerCase() !== 'p' &&
+        clickedElement.tagName.toLowerCase() !== 'input' &&
+        clickedElement.tagName.toLowerCase() !== 'i' &&
+        clickedElement.tagName.toLowerCase() !== 'span' &&
+        !clickedElement.classList.contains('typing-area') &&
+        !clickedElement.classList.contains('focus-popup-wrapper') &&
+        !clickedElement.classList.contains('heading') &&
+        !clickedElement.closest('.popups')) {
 
-//         mouseCaret.classList.add('clicked');
-//         setTimeout(function () {
-//             mouseCaret.classList.remove('clicked');
-//         }, 800);
-//     }
-// });
+        mouseCaret.classList.add('clicked');
+        setTimeout(function () {
+            mouseCaret.classList.remove('clicked');
+        }, 800);
+    }
+});
 
 document.addEventListener('click', (event) => {
     const reloadIcon = event.target.closest('#after-text span i');
@@ -207,7 +221,7 @@ window.matchMedia("(max-width: 800px)").onchange = e => {
 }
 
 function applyNextColorTheme() {
-    var themes = ['theme1', 'theme2', 'theme3', 'theme4'];
+    var themes = ['theme1', 'theme2', 'theme3'];
     var currentTheme = getAppliedTheme();
     document.documentElement.classList.remove(currentTheme);
     var currentIndex = themes.indexOf(currentTheme);
@@ -217,7 +231,7 @@ function applyNextColorTheme() {
 }
 
 function getAppliedTheme() {
-    var themes = ['theme1', 'theme2', 'theme3', 'theme4'];
+    var themes = ['theme1', 'theme2', 'theme3'];
     var appliedTheme = themes.find(theme => document.documentElement.classList.contains(theme));
     return appliedTheme;
 }
@@ -245,13 +259,13 @@ let firstWordTop = document.querySelector(".span0").getBoundingClientRect().top;
 
 input.addEventListener("keydown", (e) => {
     if (e.ctrlKey && e.key === "Backspace") {
-        e.preventDefault(); // Prevent the default behavior of the key combination
+        e.preventDefault();
         return;
     }
     let ptr = input.value;
     if (ptr.length < 1) {
         return;
-    } //if no character is left
+    }
 
     if (e.key === "Backspace") {
         let once = true;
@@ -259,7 +273,6 @@ input.addEventListener("keydown", (e) => {
         let index = document.querySelector(
             `p.given-text span.span${ptr.length - 1}`
         );
-        // remove notTyped class from all chars till the place where space was entered
         while (index.classList.contains("notTyped")) {
             if (once) {
                 let afterIndex = document.querySelector(
@@ -289,7 +302,6 @@ input.addEventListener("keydown", (e) => {
             flag = true;
         }
         if (flag) {
-            // only if above loop ran
             input.value = ptr;
             input.value += originalString[ptr.length - 1];
             let caretLeft = index.getBoundingClientRect().left - firstWordLeft + index.getBoundingClientRect().width;
@@ -503,7 +515,6 @@ function startTimerForClock() {
             clearInterval(timerIntervalId);
             return;
         }
-        // console.log(clock);
         clock--;
         stopWatch.innerText = clock;
         stopWatch.classList.remove('liveTimeEffects');
@@ -619,7 +630,6 @@ function moveCaret(index) {
 
 function moveCaretDown(afterIndex, index) {
     line++;
-    // console.log(line, totalLines);
     let caretLeft = 0;
     caret.style.left = `${caretLeft}px`;
     let caretTop = afterIndex.getBoundingClientRect().top - firstWordTop + 36;
@@ -633,7 +643,6 @@ function moveCaretDown(afterIndex, index) {
             typingArea.scrollTop = scrollDistance;
         }
     }
-    // console.log(scrollDistance);
 }
 
 function moveCaretBack(index) {
@@ -727,6 +736,9 @@ inputText.addEventListener('click', () => {
 inputText.addEventListener('paste', (event) => {
     event.preventDefault();
     const text = event.clipboardData.getData('text/plain');
+    if (text.length > 2500) {
+        return;
+    }
     inputText.textContent = text;
 });
 
