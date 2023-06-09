@@ -380,12 +380,12 @@ main>article[data-status="becoming-active-from-after"] {
 }
 
 article[data-index='0'] .image {
-    background-image: url(/images/pexels-min-an-1448709.jpg);
+    background-image: url(/images/typing.jpg);
     filter: grayscale(30%);
 }
 
 article[data-index="1"] .image {
-    background-image: url(/images/pexels-nothing-ahead-3571563.jpg);
+    background-image: url(/images/leaf.jpg);
     position: relative;
     filter: grayscale(0%);
 }
