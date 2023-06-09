@@ -295,6 +295,7 @@ a {
     width: calc(100vw - 100vw/3);
     padding: 1rem;
     display: grid;
+    flex-grow: 1;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 10px;

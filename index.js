@@ -174,7 +174,14 @@ app.get('/read', async (req, res) => {
   res.render('read', { data, sessionId });
 })
 
-app.get('/test', (req, res) => {
+app.get('/test', async (req, res) => {
+  try {
+    if (data == '') {
+      await fetchData();
+    }
+  } catch (error) {
+    console.log(error);
+  }
   const randomNumber = Math.floor(Math.random() * 15);
   content = radata[0].data[randomNumber].content;
   res.render('typing', { content, sessionId });

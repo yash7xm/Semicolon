@@ -74,8 +74,11 @@ input.style.width = '0';
 input.style.border = '0';
 input.style.padding = '0';
 
+
 window.addEventListener('resize', () => {
+
     location.reload();
+   
 })
 
 // console.log(width);
