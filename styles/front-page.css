@@ -691,7 +691,8 @@ article[data-index="1"] .image {
     }
 
     .description>div>p {
-        font-size: 0.75rem;
+        font-size: 0.5rem;
+        line-height: 1.2rem;
     }
 
     .move-btns {
@@ -699,7 +700,8 @@ article[data-index="1"] .image {
     }
 
     .description {
-        padding: 2rem;
+        padding: 1rem 2rem;
+        overflow: scroll;
     }
     
     
