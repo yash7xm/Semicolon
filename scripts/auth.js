@@ -69,6 +69,14 @@ input.forEach(link => {
     })
 })
 
+singInBtn.addEventListener('mouseover', () => {
+    mouseCaret.classList.remove('mouseCaret');
+})
+
+singInBtn.addEventListener('mouseleave', () => {
+    mouseCaret.classList.add('mouseCaret');
+})
+
 singInBtn.addEventListener('click', () => {
     info.style.transform = 'translateX(150%)';
     info.style.border = 'none';
@@ -90,6 +98,14 @@ singInBtn.addEventListener('click', () => {
         reg.style.display = 'flex';
         reg.style.zIndex = '1000';
     }, 250);
+})
+
+singUpBtn.addEventListener('mouseover', () => {
+    mouseCaret.classList.remove('mouseCaret');
+})
+
+singUpBtn.addEventListener('mouseleave', () => {
+    mouseCaret.classList.add('mouseCaret');
 })
 
 singUpBtn.addEventListener('click', () => {
@@ -120,6 +136,15 @@ mobileSignIn.addEventListener('click', () => {
 })
 
 const signInForm = document.querySelector('.signIn form');
+const signInFormBtn = document.querySelector('.signIn form button');
+
+signInFormBtn.addEventListener('mouseover', () => {
+    mouseCaret.classList.remove('mouseCaret');
+})
+
+signInFormBtn.addEventListener('mouseleave', () => {
+    mouseCaret.classList.add('mouseCaret');
+})
 
 signInForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -153,6 +178,15 @@ signInForm.addEventListener("submit", async (e) => {
 })
 
 const regForm = document.querySelector(".reg form");
+const signUpFormBtn = document.querySelector('.reg form button');
+
+signUpFormBtn.addEventListener('mouseover', () => {
+    mouseCaret.classList.remove('mouseCaret');
+})
+
+signUpFormBtn.addEventListener('mouseleave', () => {
+    mouseCaret.classList.add('mouseCaret');
+})
 
 regForm.addEventListener("submit", async (e) => {
     e.preventDefault();
