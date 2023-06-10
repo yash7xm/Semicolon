@@ -390,6 +390,12 @@ article[data-index="1"] .image {
     filter: grayscale(0%);
 }
 
+article[data-index="2"] .image {
+    background-image: url(/images/20230610_154749.jpg);
+    position: relative;
+    filter: grayscale(0%);
+}
+
 .personel-info {
     font-size: 1.5rem !important; 
 }
