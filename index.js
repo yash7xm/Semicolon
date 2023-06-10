@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const cookieParser = require('cookie-parser');
 let data = '';
@@ -204,7 +204,9 @@ app.post('/register', async (req, res) => {
   username = username.replace(/\s+/g, " ").trim();
   password = password.replace(/\s+/g, " ").trim();
   let flag = false;
-  const hash = await bcrypt.hash(password, 12);
+  // const hash = await bcrypt.hash(password, 12);
+  const salt = await bcrypt.genSalt(12);
+  const hash = await bcrypt.hash(password, salt);
   const user = new User({
     name,
     username,
