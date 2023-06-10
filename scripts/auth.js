@@ -22,6 +22,10 @@ window.addEventListener('mousemove', (e) => {
     mouseCaret.style.left = e.pageX + 'px';
 })
 
+window.addEventListener('resize', () => {
+    window.location.reload();
+})
+
 logo.addEventListener('mouseover', () => {
     mouseCaret.classList.add('caret-grow');
 })

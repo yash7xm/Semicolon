@@ -293,7 +293,7 @@ article>div {
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
     border-right: 1px solid var(--border-color);
-    background-image: url(/images/goofer-eUBp69MTaNU-unsplash.jpg);
+    background-image: url(/images/background.jpg);
     background-position: center;
     background-size: cover;
     transition: border-bottom 300ms ease;

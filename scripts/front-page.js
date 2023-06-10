@@ -223,7 +223,7 @@ async function fetchUsers() {
 function showLeaderBoard() {
     const list = document.querySelector('.top-list');
 
-    for (let i = 0; i < users.length && i < 10; i++) {
+    for (let i = 0; i < users.length && i < 100; i++) {
 
         const restList = document.createElement('div');
         restList.classList.add('rest-list');
