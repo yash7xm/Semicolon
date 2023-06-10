@@ -488,7 +488,7 @@ let userData;
 
 // fetchUserData();
 async function fetchUserData() {
-    await fetch('http://localhost:8080/graphData')
+    await fetch('https://semicolon-io9d.onrender.com/graphData')
         .then(response => response.json())
         .then(data => {
             userData = data;
@@ -666,7 +666,7 @@ function drawChart() {
 
 async function updateMsg() {
     try {
-        const response = await fetch('http://localhost:8080/updateMsg', {
+        const response = await fetch('https://semicolon-io9d.onrender.com/updateMsg', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -686,7 +686,7 @@ async function updateMsg() {
 
 async function updateName() {
     try {
-        const response = await fetch('http://localhost:8080/updateName', {
+        const response = await fetch('https://semicolon-io9d.onrender.com/updateName', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -706,7 +706,7 @@ async function updateName() {
 
 async function updatePhoto() {
     try {
-        const response = await fetch('http://localhost:8080/updatePhoto', {
+        const response = await fetch('https://semicolon-io9d.onrender.com/updatePhoto', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

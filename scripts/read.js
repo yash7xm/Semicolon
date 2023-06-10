@@ -199,7 +199,7 @@ let data;
 fetchData();
 async function fetchData() {
   try {
-    const response = await fetch('http://localhost:8080/dog');
+    const response = await fetch('https://semicolon-io9d.onrender.com/dog');
     data = (await response.json());
   } catch (error) {
     // console.error('There was a problem with the fetch operation:', error);
@@ -327,7 +327,7 @@ function showTopics() {
 topics.addEventListener('click', async (event) => {
   if (event.target.parentNode.classList.contains('card')) {
     let topicNo = event.target.parentNode.getAttribute('value');
-    await fetch('http://localhost:8080/showPost', {
+    await fetch('https://semicolon-io9d.onrender.com/showPost', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -338,6 +338,6 @@ topics.addEventListener('click', async (event) => {
         unitIndex: unitNo,
       })
     })
-    window.location.href = 'http://localhost:8080/show';
+    window.location.href = 'https://semicolon-io9d.onrender.com/show';
   }
 })

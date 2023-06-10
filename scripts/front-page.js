@@ -6,6 +6,7 @@ const leftBtn = document.querySelectorAll('.move-btns .left-btn');
 const borderLinks = document.querySelectorAll('.border-link');
 const nav = document.querySelector('nav');
 const loading = document.querySelector('.loading-wrapper');
+const gitLinks = document.querySelectorAll('.personel-info > a');
 
 let scrollDownStop = false;
 let scrollTopStop = false;
@@ -67,6 +68,15 @@ navLinks.forEach(link => {
     link.addEventListener('mouseleave', () => {
         mouseCaret.classList.remove('caret-grow');
         link.classList.remove('hovered-link');
+    })
+})
+
+gitLinks.forEach(link => {
+    link.addEventListener('mouseover', () => {
+        mouseCaret.classList.remove('mouseCaret');
+    })
+    link.addEventListener('mouseleave', () => {
+        mouseCaret.classList.add('mouseCaret');
     })
 })
 
@@ -200,7 +210,7 @@ function getAppliedTheme() {
 
 fetchEverything();
 async function fetchEverything() {
-    await fetch('http://localhost:8080/everything', {
+    await fetch('https://semicolon-io9d.onrender.com/everything', {
         method: "POST",
 
     })
@@ -209,7 +219,7 @@ async function fetchEverything() {
 
 fetchUsers();
 async function fetchUsers() {
-    fetch('http://localhost:8080/leadborad')
+    fetch('https://semicolon-io9d.onrender.com/leadborad')
         .then(response => response.json())
         .then(data => {
             users = data;
