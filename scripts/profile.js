@@ -236,9 +236,9 @@ popupWraper.addEventListener('click', (event) => {
 userPhotos.forEach((photo) => {
     photo.addEventListener('click', (event) => {
         value = event.target.dataset.value;
-        updatePhoto();
         const selectedImageSrc = event.target.getAttribute('src');
         userMainPhoto.setAttribute('src', selectedImageSrc);
+        updatePhoto();
     });
 });
 
