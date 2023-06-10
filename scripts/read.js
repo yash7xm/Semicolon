@@ -202,7 +202,7 @@ async function fetchData() {
     const response = await fetch('http://localhost:8080/dog');
     data = (await response.json());
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+    // console.error('There was a problem with the fetch operation:', error);
   }
 }
 

@@ -216,7 +216,7 @@ async function fetchUsers() {
             showLeaderBoard();
         })
         .catch(error => {
-            console.error('Error:', error);
+            // console.error('Error:', error);
         });
 }
 

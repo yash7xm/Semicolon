@@ -496,7 +496,7 @@ async function fetchUserData() {
             google.charts.setOnLoadCallback(drawChart);
         })
         .catch(error => {
-            console.error('Error:', error);
+            // console.error('Error:', error);
         });
 }
 
@@ -679,7 +679,7 @@ async function updateMsg() {
             throw new Error('Failed to update msg');
         }
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         throw error;
     }
 }
@@ -699,7 +699,7 @@ async function updateName() {
             throw new Error('Failed to update name');
         }
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         throw error;
     }
 }
@@ -719,7 +719,7 @@ async function updatePhoto() {
             throw new Error('Failed to update photo');
         }
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         throw error;
     }
 }

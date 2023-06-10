@@ -777,6 +777,6 @@ async function updateScoreDb() {
             throw new Error('Failed to update score');
         }
     } catch (error) {
-        console.error(error);
+        // console.error(error);
     }
 }
